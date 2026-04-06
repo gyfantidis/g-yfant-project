@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/* ── OS Color System ── */
+:root {
+  --os-bg: #0a0a0f;
+  --os-surface: #111118;
+  --os-surface-2: #161621;
+  --os-accent: #00ff88;
+  --os-blue: #0ea5e9;
+  --os-text: #e2e8f0;
+  --os-muted: #4a5568;
+  --os-border: #1e2030;
+  --os-titlebar: #0d0d15;
+  --os-red: #ff5f57;
+  --os-yellow: #febc2e;
+  --os-green-btn: #28c840;
+}
+
+@theme inline {
+  --color-background: var(--os-bg);
+  --color-foreground: var(--os-text);
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  --font-sans: var(--font-dmsans), 'DM Sans', sans-serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--os-bg);
+  color: var(--os-text);
+  font-family: var(--font-dmsans), 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#__next, main {
+  height: 100%;
+}
+
+/* ── Custom crosshair cursor ── */
+body {
+  cursor: crosshair;
+}
+input, textarea {
+  cursor: text;
+}
+button, a, [role="button"] {
+  cursor: pointer;
+}
+.cursor-grab { cursor: grab; }
+.cursor-grab:active { cursor: grabbing; }
+.cursor-se-resize { cursor: se-resize; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--os-surface); }
+::-webkit-scrollbar-thumb { background: var(--os-border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--os-muted); }
+
+/* ── Moving particle-dot grid ── */
+@keyframes gridMove {
+  from { background-position: 0 0; }
+  to   { background-position: 40px 40px; }
+}
+.particle-grid {
+  background-image: radial-gradient(circle, rgba(0, 255, 136, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 24s linear infinite;
+}
+
+/* ── Scanline overlay ── */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.022) 2px,
+    rgba(0, 0, 0, 0.022) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ── Terminal cursor blink ── */
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background-color: var(--os-accent);
+  vertical-align: text-bottom;
+  animation: cursorBlink 1s step-end infinite;
+  margin-left: 1px;
+}
+
+/* ── Glow utilities ── */
+.glow-green {
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.35), 0 0 40px rgba(0, 255, 136, 0.1);
+}
+.glow-blue {
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.35), 0 0 40px rgba(14, 165, 233, 0.1);
+}
+.text-glow-green {
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
+}
+
+/* ── OS Window chrome ── */
+.os-window {
+  background: var(--os-surface);
+  border: 1px solid var(--os-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.os-titlebar {
+  background: var(--os-titlebar);
+  border-bottom: 1px solid var(--os-border);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.os-window-content {
+  flex: 1;
+  overflow: auto;
+  user-select: text;
+}
+
+/* ── Traffic light buttons ── */
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: filter 0.15s;
+  border: none;
+  position: relative;
+}
+.traffic-light:hover { filter: brightness(1.25); }
+.traffic-light span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.traffic-light:hover span { opacity: 1; }
+
+/* ── Desktop icon ── */
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  transition: background 0.15s;
+  width: 82px;
+}
+.desktop-icon:hover {
+  background: rgba(0, 255, 136, 0.07);
+}
+.desktop-icon:hover .desktop-icon-label {
+  color: var(--os-accent);
+}
+.desktop-icon-emoji {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  transition: transform 0.15s;
+}
+.desktop-icon:hover .desktop-icon-emoji {
+  transform: scale(1.08);
+}
+.desktop-icon-label {
+  font-size: 11px;
+  font-family: var(--font-jetbrains), monospace;
+  color: var(--os-text);
+  text-align: center;
+  line-height: 1.3;
+  transition: color 0.15s;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+/* ── Tag pill ── */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-family: var(--font-jetbrains), monospace;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.15s;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  body { overflow: auto; }
+  .os-window {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
