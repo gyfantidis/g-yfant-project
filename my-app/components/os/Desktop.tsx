@@ -16,6 +16,8 @@ import BlogApp from "@/components/apps/BlogApp";
 import SkillsApp from "@/components/apps/SkillsApp";
 import ContactApp from "@/components/apps/ContactApp";
 import CertificationsApp from "@/components/apps/CertificationsApp";
+import NowApp from "@/components/apps/NowApp";
+import BooksApp from "@/components/apps/BooksApp";
 
 // ── App registry ──────────────────────────────────────────────
 interface AppDef {
@@ -104,15 +106,35 @@ const APPS: AppDef[] = [
       defaultSize: { width: 620, height: 520 },
     },
   },
+  {
+    id: "now",
+    emoji: "📍",
+    label: "Now",
+    component: NowApp,
+    window: {
+      title: "now.app",
+      defaultPosition: { x: 260, y: 60 },
+      defaultSize: { width: 480, height: 520 },
+    },
+  },
+  {
+    id: "books",
+    emoji: "📖",
+    label: "Books",
+    component: BooksApp,
+    window: {
+      title: "books.app",
+      defaultPosition: { x: 300, y: 70 },
+      defaultSize: { width: 520, height: 560 },
+    },
+  },
 ];
 
 // ── Mobile app drawer ──────────────────────────────────────────
 function MobileDrawer() {
-  const { openWindow } = useWindowManager();
   const [activeApp, setActiveApp] = useState<AppId | null>(null);
 
   function openApp(id: AppId) {
-    openWindow(id);
     setActiveApp(id);
   }
 
@@ -141,15 +163,16 @@ function MobileDrawer() {
                 background: "var(--os-surface-2)",
                 border: "1px solid var(--os-border)",
                 borderRadius: 12,
-                padding: 16,
+                padding: "20px 10px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 8,
+                gap: 10,
                 cursor: "pointer",
+                WebkitTapHighlightColor: "transparent",
               }}
             >
-              <span style={{ fontSize: 32 }}>{app.emoji}</span>
+              <span style={{ fontSize: 34 }}>{app.emoji}</span>
               <span
                 style={{
                   fontFamily: "var(--font-jetbrains), monospace",
@@ -176,7 +199,7 @@ function MobileDrawer() {
             style={{
               position: "fixed",
               inset: 0,
-              zIndex: 100,
+              zIndex: 6000,
               background: "var(--os-surface)",
               display: "flex",
               flexDirection: "column",
@@ -185,7 +208,9 @@ function MobileDrawer() {
             {/* Mobile title bar */}
             <div
               style={{
-                padding: "14px 16px",
+                paddingTop: "max(14px, env(safe-area-inset-top))",
+                paddingBottom: 14,
+                paddingInline: 16,
                 background: "var(--os-titlebar)",
                 borderBottom: "1px solid var(--os-border)",
                 display: "flex",
@@ -266,7 +291,6 @@ function DesktopContent() {
             position: "absolute",
             top: 20,
             left: 20,
-            display: "flex",
             flexDirection: "column",
             gap: 8,
           }}
@@ -281,24 +305,26 @@ function DesktopContent() {
           ))}
         </div>
 
-        {/* Windows */}
-        <AnimatePresence>
-          {APPS.map((app) => {
-            const win = windows[app.id];
-            if (!win.isOpen || win.isMinimized) return null;
-            return (
-              <Window
-                key={app.id}
-                id={app.id}
-                title={app.window.title}
-                defaultPosition={app.window.defaultPosition}
-                defaultSize={app.window.defaultSize}
-              >
-                <app.component />
-              </Window>
-            );
-          })}
-        </AnimatePresence>
+        {/* Windows — desktop only */}
+        <div className="hidden md:block">
+          <AnimatePresence>
+            {APPS.map((app) => {
+              const win = windows[app.id];
+              if (!win.isOpen || win.isMinimized) return null;
+              return (
+                <Window
+                  key={app.id}
+                  id={app.id}
+                  title={app.window.title}
+                  defaultPosition={app.window.defaultPosition}
+                  defaultSize={app.window.defaultSize}
+                >
+                  <app.component />
+                </Window>
+              );
+            })}
+          </AnimatePresence>
+        </div>
 
         {/* Mobile drawer (hidden on md+) */}
         <div

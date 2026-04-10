@@ -224,4 +224,14 @@ button, a, [role="button"] {
     border: none;
     box-shadow: none;
   }
+
+  /* Hide open-windows list in taskbar on mobile (no floating windows on mobile) */
+  .taskbar-windows {
+    display: none !important;
+  }
+
+  /* Larger tap targets */
+  button, a {
+    min-height: 44px;
+  }
 }

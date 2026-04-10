@@ -14,30 +14,27 @@ interface BootLine {
 }
 
 const BOOT_LINES: BootLine[] = [
-  { text: "BIOS v2.0 — GY-OS Boot Manager", color: "#4a5568", speed: 28 },
+  { text: "GY-OS v1.0 — Personal System Boot", color: "#4a5568", speed: 26 },
   { text: "", speed: 0 },
-  { text: "Initializing g-yfantidis.gr...", color: "#00ff88", speed: 32 },
-  {
-    text: "Loading kernel modules: [react] [nextjs] [docker] [spring-boot]",
-    speed: 22,
-  },
-  { text: "Mounting /projects.......................... OK", speed: 18 },
-  { text: "Mounting /blog.............................. OK", speed: 18 },
-  { text: "Mounting /skills............................ OK", speed: 18 },
-  { text: "Starting network services................... OK", speed: 18 },
-  { text: "Checking system integrity................... PASS", speed: 18 },
+  { text: "→ loading giannis.config...", color: "#00ff88", speed: 30 },
+  { text: "→ importing 9 years of field experience...", speed: 22 },
+  { text: "→ mounting /projects .................. done", speed: 16 },
+  { text: "→ mounting /blog ...................... done", speed: 16 },
+  { text: "→ mounting /now ....................... done", speed: 16 },
+  { text: "→ syncing Athens, GR timezone ......... done", speed: 16 },
+  { text: "→ warming up coffee machine ........... ☕  ", speed: 16 },
   { text: "", speed: 0 },
-  {
-    text: "Welcome, visitor. Login successful.",
-    color: "#00ff88",
-    speed: 40,
-  },
+  { text: "→ running self-check...", speed: 24 },
+  { text: "   [✓] full-stack          ok", color: "#00ff88", speed: 14 },
+  { text: "   [✓] devops              ok", color: "#00ff88", speed: 14 },
+  { text: "   [✓] MSc DAMA            in progress", color: "#0ea5e9", speed: 14 },
+  { text: "   [✓] imposter syndrome   not found", color: "#00ff88", speed: 14 },
   { text: "", speed: 0 },
-  { text: "Starting desktop environment...", color: "#0ea5e9", speed: 30 },
+  { text: "desktop ready. welcome, visitor.", color: "#0ea5e9", speed: 38 },
 ];
 
-// Cumulative delay before each line starts (after previous line finishes)
-const LINE_GAPS = [0, 0, 180, 120, 80, 60, 60, 60, 60, 0, 220, 0, 280];
+// Delay before each line starts (ms after previous finishes)
+const LINE_GAPS = [0, 0, 200, 100, 70, 50, 50, 50, 50, 0, 180, 60, 40, 40, 40, 0, 300];
 
 export default function BootSequence({ onComplete }: BootSequenceProps) {
   const [lines, setLines] = useState<{ text: string; color?: string }[]>([]);
@@ -47,7 +44,6 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
     color?: string;
   } | null>(null);
   const [done, setDone] = useState(false);
-  const lineIndexRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {

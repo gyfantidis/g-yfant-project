@@ -93,21 +93,24 @@ export default function AboutApp() {
             width: 88,
             height: 88,
             borderRadius: "50%",
-            backgroundColor: "var(--os-surface-2)",
             border: "2px solid var(--os-accent)",
             boxShadow:
               "0 0 20px rgba(0,255,136,0.2), 0 0 40px rgba(0,255,136,0.08)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             flexShrink: 0,
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 26,
-            fontWeight: 700,
-            color: "var(--os-accent)",
+            overflow: "hidden",
           }}
         >
-          GY
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/profile.jpg"
+            alt="Giannis Yfantidis"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+            }}
+          />
         </div>
 
         <div style={{ flex: 1 }}>
@@ -386,6 +389,62 @@ export default function AboutApp() {
                   </span>
                 )}
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Photos ── */}
+      <div>
+        <SectionTitle icon="📸" label="In the wild" />
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {[
+            { src: "/profile2.jpg",        alt: "Giannis Yfantidis",  label: null,             pos: "center 35%" },
+            { src: "/profile-ngi.jpg",     alt: "NGI Forum",          label: "NGI Forum · EU", pos: "center 25%" },
+            { src: "/event-ngi.jpg",       alt: "NGI event hall",     label: "NGI Summit",     pos: "center center" },
+            { src: "/portrait-outdoor.jpg",alt: "Athens outdoors",    label: "Athens",         pos: "center 55%" },
+            { src: "/portrait-casual.jpg", alt: "Giannis Yfantidis",  label: null,             pos: "center 20%" },
+          ].map(({ src, alt, label, pos }) => (
+            <div
+              key={src}
+              style={{
+                flex: "1 1 140px",
+                minWidth: 120,
+                height: 150,
+                borderRadius: 10,
+                overflow: "hidden",
+                border: "1px solid var(--os-border)",
+                position: "relative",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={alt}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: pos,
+                }}
+              />
+              {label && (
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 6,
+                    left: 8,
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: 10,
+                    color: "rgba(255,255,255,0.9)",
+                    background: "rgba(0,0,0,0.55)",
+                    padding: "2px 7px",
+                    borderRadius: 4,
+                  }}
+                >
+                  {label}
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -66,8 +66,12 @@ export default function TerminalApp() {
     ];
 
     if (result.action === "open_contact") {
-      // small delay so user sees the response first
       setTimeout(() => openWindow("contact"), 800);
+    }
+
+    if (result.openApp) {
+      const id = result.openApp;
+      setTimeout(() => openWindow(id as Parameters<typeof openWindow>[0]), 500);
     }
 
     setHistory(newHistory);
@@ -156,7 +160,7 @@ export default function TerminalApp() {
                 line === "" ? (
                   <div key={j} style={{ height: "0.5em" }} />
                 ) : (
-                  <div key={j} style={{ whiteSpace: "pre" }}>
+                  <div key={j} style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
                     {line}
                   </div>
                 )

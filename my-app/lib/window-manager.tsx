@@ -15,7 +15,9 @@ export type AppId =
   | "blog"
   | "skills"
   | "contact"
-  | "certifications";
+  | "certifications"
+  | "now"
+  | "books";
 
 export const APP_IDS: AppId[] = [
   "about",
@@ -25,6 +27,8 @@ export const APP_IDS: AppId[] = [
   "skills",
   "contact",
   "certifications",
+  "now",
+  "books",
 ];
 
 export interface WindowState {

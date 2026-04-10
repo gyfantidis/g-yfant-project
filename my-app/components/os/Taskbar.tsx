@@ -11,6 +11,8 @@ const APP_LABELS: Record<AppId, string> = {
   skills: "Stack",
   contact: "Contact",
   certifications: "Certs",
+  now: "Now",
+  books: "Books",
 };
 
 const APP_EMOJIS: Record<AppId, string> = {
@@ -21,6 +23,8 @@ const APP_EMOJIS: Record<AppId, string> = {
   skills: "🛠️",
   contact: "📬",
   certifications: "🏆",
+  now: "📍",
+  books: "📖",
 };
 
 function AthensTime() {
@@ -84,7 +88,7 @@ export default function Taskbar() {
       }}
     >
       {/* Open windows list */}
-      <div style={{ display: "flex", alignItems: "center", gap: 4, flex: 1 }}>
+      <div className="taskbar-windows" style={{ display: "flex", alignItems: "center", gap: 4, flex: 1 }}>
         {openWindows.map(([id, win]) => (
           <button
             key={id}
