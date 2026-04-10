@@ -15,6 +15,7 @@ import TerminalApp from "@/components/apps/TerminalApp";
 import BlogApp from "@/components/apps/BlogApp";
 import SkillsApp from "@/components/apps/SkillsApp";
 import ContactApp from "@/components/apps/ContactApp";
+import CertificationsApp from "@/components/apps/CertificationsApp";
 
 // ── App registry ──────────────────────────────────────────────
 interface AppDef {
@@ -92,11 +93,22 @@ const APPS: AppDef[] = [
       defaultSize: { width: 480, height: 500 },
     },
   },
+  {
+    id: "certifications",
+    emoji: "🏆",
+    label: "Certs",
+    component: CertificationsApp,
+    window: {
+      title: "certifications.app",
+      defaultPosition: { x: 220, y: 76 },
+      defaultSize: { width: 620, height: 520 },
+    },
+  },
 ];
 
 // ── Mobile app drawer ──────────────────────────────────────────
 function MobileDrawer() {
-  const { openWindow, windows } = useWindowManager();
+  const { openWindow } = useWindowManager();
   const [activeApp, setActiveApp] = useState<AppId | null>(null);
 
   function openApp(id: AppId) {

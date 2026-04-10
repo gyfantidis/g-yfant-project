@@ -12,6 +12,14 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
+    title: "Gendox",
+    url: "https://ctrlspace.dev",
+    description:
+      "No-code platform for building intelligent AI chat agents powered by Generative AI. Enables organizations to create expert-level conversational agents across diverse industries. Built at Ctrl+Space Labs.",
+    tech: ["Spring Boot", "React", "AWS", "PostgreSQL", "REST APIs", "Java"],
+    highlight: "Live",
+  },
+  {
     title: "oneprompt.gr",
     url: "https://oneprompt.gr",
     description:

@@ -2,49 +2,121 @@
 
 import GlowButton from "@/components/ui/GlowButton";
 
+const EXPERIENCE = [
+  {
+    company: "Ctrl+Space Labs",
+    title: "Software Engineer",
+    period: "Sep 2023 — Present",
+    location: "Athens, Greece",
+    description:
+      "Implementing Gendox — a no-code platform for building AI chat agents powered by Generative AI. Full-stack: Spring Boot REST APIs, React frontend, AWS deployments, CI/CD pipelines.",
+    current: true,
+  },
+  {
+    company: "EASTH",
+    title: "IT & Agricultural Management Consultant",
+    period: "Apr 2014 — Jan 2023",
+    location: "Kilkis, Greece",
+    description:
+      "9-year tenure managing IT infrastructure, GIS field digitalization, IACS agricultural subsidy systems, and web solutions for one of Thessaloniki's largest agricultural partnerships.",
+    current: false,
+  },
+];
+
+const EDUCATION = [
+  {
+    school: "Hellenic Open University",
+    degree: "MSc — Data Science & Machine Learning (DAMA)",
+    period: "2024 — 2026",
+    active: true,
+  },
+  {
+    school: "Hellenic Open University",
+    degree: "Bachelor's — Computer Science & Informatics",
+    period: "2017 — 2022",
+    active: false,
+  },
+];
+
+function SectionTitle({ icon, label }: { icon: string; label: string }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 14,
+      }}
+    >
+      <span style={{ fontSize: 14 }}>{icon}</span>
+      <span
+        style={{
+          fontFamily: "var(--font-jetbrains), monospace",
+          fontSize: 11,
+          fontWeight: 600,
+          color: "var(--os-muted)",
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+        }}
+      >
+        {label}
+      </span>
+      <div
+        style={{
+          flex: 1,
+          height: 1,
+          background: "var(--os-border)",
+          marginLeft: 6,
+        }}
+      />
+    </div>
+  );
+}
+
 export default function AboutApp() {
   return (
     <div
       style={{
-        padding: 32,
+        padding: 28,
         display: "flex",
         flexDirection: "column",
-        gap: 24,
+        gap: 26,
         fontFamily: "var(--font-dmsans), sans-serif",
+        height: "100%",
+        overflow: "auto",
       }}
     >
-      {/* Profile section */}
-      <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
-        {/* Avatar */}
+      {/* ── Profile ── */}
+      <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
         <div
           style={{
-            width: 96,
-            height: 96,
+            width: 88,
+            height: 88,
             borderRadius: "50%",
             backgroundColor: "var(--os-surface-2)",
             border: "2px solid var(--os-accent)",
-            boxShadow: "0 0 20px rgba(0,255,136,0.2), 0 0 40px rgba(0,255,136,0.08)",
+            boxShadow:
+              "0 0 20px rgba(0,255,136,0.2), 0 0 40px rgba(0,255,136,0.08)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
             fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 28,
-            fontWeight: 600,
+            fontSize: 26,
+            fontWeight: 700,
             color: "var(--os-accent)",
           }}
         >
           GY
         </div>
 
-        {/* Name + title */}
         <div style={{ flex: 1 }}>
           <h1
             style={{
-              fontSize: 22,
+              fontSize: 20,
               fontWeight: 700,
               color: "var(--os-text)",
-              marginBottom: 4,
+              marginBottom: 3,
             }}
           >
             Giannis Yfantidis
@@ -52,25 +124,23 @@ export default function AboutApp() {
           <p
             style={{
               fontFamily: "var(--font-jetbrains), monospace",
-              fontSize: 13,
+              fontSize: 12,
               color: "var(--os-accent)",
-              marginBottom: 12,
+              marginBottom: 10,
             }}
           >
             DevOps &amp; Full-Stack Engineer
           </p>
-
-          {/* Status badge */}
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              padding: "4px 12px",
+              padding: "3px 10px",
               borderRadius: 20,
               background: "rgba(0,255,136,0.08)",
               border: "1px solid rgba(0,255,136,0.2)",
-              fontSize: 12,
+              fontSize: 11,
               color: "var(--os-accent)",
               fontFamily: "var(--font-jetbrains), monospace",
             }}
@@ -81,7 +151,6 @@ export default function AboutApp() {
                 height: 6,
                 borderRadius: "50%",
                 backgroundColor: "var(--os-accent)",
-                animation: "cursorBlink 2s ease-in-out infinite",
               }}
             />
             Open to opportunities
@@ -89,15 +158,15 @@ export default function AboutApp() {
         </div>
       </div>
 
-      {/* Bio */}
+      {/* ── Bio ── */}
       <div
         style={{
           borderLeft: "2px solid var(--os-accent)",
-          paddingLeft: 16,
+          paddingLeft: 14,
           color: "var(--os-text)",
-          fontSize: 14,
+          fontSize: 13,
           lineHeight: 1.75,
-          opacity: 0.9,
+          opacity: 0.88,
         }}
       >
         I build systems that scale and interfaces that matter. Currently
@@ -105,12 +174,12 @@ export default function AboutApp() {
         Athens, Greece.
       </div>
 
-      {/* Quick stats */}
+      {/* ── Quick stats ── */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 12,
+          gap: 10,
         }}
       >
         {[
@@ -124,7 +193,7 @@ export default function AboutApp() {
               background: "var(--os-surface-2)",
               border: "1px solid var(--os-border)",
               borderRadius: 8,
-              padding: "10px 14px",
+              padding: "9px 12px",
             }}
           >
             <div
@@ -132,21 +201,197 @@ export default function AboutApp() {
                 fontFamily: "var(--font-jetbrains), monospace",
                 fontSize: 10,
                 color: "var(--os-muted)",
-                marginBottom: 4,
+                marginBottom: 3,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
               }}
             >
               {label}
             </div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--os-text)" }}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                color: "var(--os-text)",
+              }}
+            >
               {value}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Links */}
+      {/* ── Work Experience ── */}
+      <div>
+        <SectionTitle icon="💼" label="Experience" />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {EXPERIENCE.map((job, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                gap: 14,
+                paddingBottom: i < EXPERIENCE.length - 1 ? 20 : 0,
+              }}
+            >
+              {/* Timeline */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  flexShrink: 0,
+                  width: 14,
+                }}
+              >
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: "50%",
+                    backgroundColor: job.current
+                      ? "var(--os-accent)"
+                      : "var(--os-border)",
+                    border: `2px solid ${job.current ? "rgba(0,255,136,0.3)" : "var(--os-surface-2)"}`,
+                    boxShadow: job.current
+                      ? "0 0 8px rgba(0,255,136,0.4)"
+                      : "none",
+                    marginTop: 3,
+                    flexShrink: 0,
+                  }}
+                />
+                {i < EXPERIENCE.length - 1 && (
+                  <div
+                    style={{
+                      flex: 1,
+                      width: 1,
+                      background: "var(--os-border)",
+                      marginTop: 4,
+                    }}
+                  />
+                )}
+              </div>
+
+              {/* Content */}
+              <div style={{ flex: 1 }}>
+                <div
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 13,
+                    color: "var(--os-text)",
+                    marginBottom: 1,
+                  }}
+                >
+                  {job.title}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: 11,
+                    color: job.current ? "var(--os-accent)" : "var(--os-blue)",
+                    marginBottom: 2,
+                  }}
+                >
+                  {job.company}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: 10,
+                    color: "var(--os-muted)",
+                    marginBottom: 5,
+                  }}
+                >
+                  {job.period} · {job.location}
+                </div>
+                <p
+                  style={{
+                    fontSize: 12,
+                    color: "var(--os-muted)",
+                    lineHeight: 1.65,
+                  }}
+                >
+                  {job.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Education ── */}
+      <div>
+        <SectionTitle icon="🎓" label="Education" />
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {EDUCATION.map((edu, i) => (
+            <div
+              key={i}
+              style={{
+                background: "var(--os-surface-2)",
+                border: `1px solid ${edu.active ? "rgba(0,255,136,0.2)" : "var(--os-border)"}`,
+                borderRadius: 8,
+                padding: "10px 14px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: 12,
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--os-text)",
+                    marginBottom: 3,
+                  }}
+                >
+                  {edu.school}
+                </div>
+                <div style={{ fontSize: 12, color: "var(--os-muted)" }}>
+                  {edu.degree}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  gap: 4,
+                  flexShrink: 0,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: 10,
+                    color: "var(--os-muted)",
+                  }}
+                >
+                  {edu.period}
+                </span>
+                {edu.active && (
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontSize: 9,
+                      color: "var(--os-accent)",
+                      background: "rgba(0,255,136,0.08)",
+                      border: "1px solid rgba(0,255,136,0.2)",
+                      padding: "1px 6px",
+                      borderRadius: 10,
+                    }}
+                  >
+                    In Progress
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Links ── */}
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
         <GlowButton href="https://github.com/g-yfant" variant="ghost">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">

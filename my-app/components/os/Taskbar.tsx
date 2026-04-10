@@ -10,6 +10,7 @@ const APP_LABELS: Record<AppId, string> = {
   blog: "Blog",
   skills: "Stack",
   contact: "Contact",
+  certifications: "Certs",
 };
 
 const APP_EMOJIS: Record<AppId, string> = {
@@ -19,6 +20,7 @@ const APP_EMOJIS: Record<AppId, string> = {
   blog: "✍️",
   skills: "🛠️",
   contact: "📬",
+  certifications: "🏆",
 };
 
 function AthensTime() {
@@ -55,7 +57,7 @@ function AthensTime() {
 }
 
 export default function Taskbar() {
-  const { windows, focusWindow, minimizeWindow, toggleWindow } =
+  const { windows, focusWindow, minimizeWindow } =
     useWindowManager();
 
   const openWindows = (Object.entries(windows) as [AppId, (typeof windows)[AppId]][]).filter(
