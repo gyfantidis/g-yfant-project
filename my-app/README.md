@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+
+# Personal OS Portfolio
+
+### An interactive desktop OS experience — built as a personal portfolio
+
+**[g-yfantidis.gr](https://g-yfantidis.gr)**
+
+![Next.js](https://img.shields.io/badge/Next.js_16-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat-square&logo=framer&logoColor=white)
+![Deployed on Coolify](https://img.shields.io/badge/Deployed_on-Coolify-6C47FF?style=flat-square)
+
+</div>
+
+---
+
+## Concept
+
+Instead of a traditional portfolio page, visitors boot into a simulated OS:
+
+1. **Boot sequence** — typewriter terminal animation fires up
+2. **Desktop** — a full interactive desktop with draggable, resizable windows
+3. **App windows** — each one is a section of the portfolio
+
+---
+
+## Tech Stack
+
+| Layer | Tech |
+|-------|------|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19 + TypeScript |
+| Styling | Tailwind CSS 4 + CSS custom properties (`--os-*`) |
+| Animations | Framer Motion |
+| Fonts | JetBrains Mono (OS chrome) · DM Sans (content) |
+| Deploy | Coolify (self-hosted) |
+
+---
+
+## Project Structure
+
+```
+my-app/
+├── app/
+│   ├── page.tsx          # Entry point: BootSequence → Desktop
+│   ├── layout.tsx        # Fonts, SEO metadata
+│   └── globals.css       # CSS custom property color system, scanlines, grid
+│
+├── components/
+│   ├── os/
+│   │   ├── BootSequence.tsx    # Terminal typewriter boot animation
+│   │   ├── Desktop.tsx         # APPS registry + AnimatePresence window layer
+│   │   ├── Window.tsx          # Draggable + resizable window chrome
+│   │   ├── Menubar.tsx         # Top menu bar
+│   │   ├── Taskbar.tsx         # Bottom app dock
+│   │   └── Spotlight.tsx       # Search overlay
+│   └── apps/
+│       ├── AboutApp.tsx        # Bio, experience, education
+│       ├── ProjectsApp.tsx     # Selected projects
+│       ├── SkillsApp.tsx       # Tech stack
+│       ├── TerminalApp.tsx     # Interactive CLI
+│       ├── BooksApp.tsx        # Reading list
+│       ├── ContactApp.tsx      # Contact form
+│       ├── PhotosApp.tsx       # Photo gallery with lightbox
+│       └── CertificationsApp.tsx
+│
+├── lib/
+│   ├── window-manager.tsx      # React context + useReducer for window state
+│   └── terminal-commands.ts    # CLI command → output mapping
+│
+└── public/
+    └── photos/                 # Compressed photos (max 1400px, mozjpeg 82%)
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install dependencies
+yarn install
+
+# Start dev server
+yarn dev        # → localhost:3000
+
+# Production build
+yarn build
+yarn start
+
+# Lint
+yarn lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Color System
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All OS colors use CSS custom properties. **Never use Tailwind `bg-*` classes for OS chrome** — always use inline styles with these variables:
 
-## Learn More
+```css
+--os-bg          /* main background          */
+--os-surface     /* window surface           */
+--os-surface-2   /* elevated surface         */
+--os-border      /* borders & dividers       */
+--os-text        /* primary text             */
+--os-muted       /* secondary / dimmed text  */
+--os-accent      /* green accent  #00ff88    */
+--os-blue        /* blue accent              */
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding a New App Window
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create `components/apps/MyApp.tsx` (`"use client"` component)
+2. Add an entry to the `APPS` array in `components/os/Desktop.tsx`
+3. Add the new `AppId` to the union type and `APP_IDS` array in `lib/window-manager.tsx`
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Photo Compression
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Before committing new photos to `public/photos/`, run the compression script:
+
+```bash
+node compress-photos.mjs
+```
+
+Resizes to max **1400px** wide at **82% JPEG quality** (mozjpeg). Typical size reduction: **80–99%**.
