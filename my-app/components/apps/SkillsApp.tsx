@@ -27,9 +27,7 @@ const CATEGORIES: SkillCategory[] = [
       { name: "Coolify", level: "core" },
       { name: "Hetzner", level: "proficient" },
       { name: "Linux", level: "core" },
-      { name: "Nginx", level: "proficient" },
-      { name: "Plesk", level: "proficient" },
-      { name: "Traefik", level: "proficient" },
+      { name: "AWS", level: "core" },
     ],
   },
   {
@@ -41,9 +39,7 @@ const CATEGORIES: SkillCategory[] = [
     skills: [
       { name: "React", level: "core" },
       { name: "Next.js", level: "core" },
-      { name: "TypeScript", level: "core" },
-      { name: "Tailwind CSS", level: "core" },
-      { name: "Framer Motion", level: "proficient" },
+      { name: "JavaScript", level: "core" },
       { name: "MUI", level: "proficient" },
       { name: "Redux", level: "proficient" },
     ],
@@ -59,22 +55,6 @@ const CATEGORIES: SkillCategory[] = [
       { name: "Spring Boot", level: "core" },
       { name: "REST APIs", level: "core" },
       { name: "PostgreSQL", level: "proficient" },
-      { name: "Node.js", level: "proficient" },
-    ],
-  },
-  {
-    id: "ml",
-    label: "ML & Data",
-    icon: "🤖",
-    color: "#f59e0b",
-    bgColor: "rgba(245,158,11,0.07)",
-    skills: [
-      { name: "Python", level: "core" },
-      { name: "XGBoost", level: "proficient" },
-      { name: "scikit-learn", level: "proficient" },
-      { name: "Pandas", level: "proficient" },
-      { name: "SHAP", level: "proficient" },
-      { name: "R", level: "learning" },
     ],
   },
   {
@@ -88,7 +68,6 @@ const CATEGORIES: SkillCategory[] = [
       { name: "Claude AI", level: "core" },
       { name: "Cursor IDE", level: "core" },
       { name: "ZenHub", level: "proficient" },
-      { name: "Figma", level: "learning" },
     ],
   },
 ];

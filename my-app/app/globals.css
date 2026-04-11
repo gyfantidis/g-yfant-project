@@ -16,6 +16,27 @@
   --os-green-btn: #28c840;
 }
 
+/* ── Amber theme override ── */
+[data-theme="amber"] {
+  --os-accent: #f59e0b;
+  --os-green-btn: #d97706;
+}
+[data-theme="amber"] .particle-grid {
+  background-image: radial-gradient(circle, rgba(245, 158, 11, 0.07) 1px, transparent 1px);
+}
+[data-theme="amber"] .desktop-icon:hover {
+  background: rgba(245, 158, 11, 0.07);
+}
+[data-theme="amber"] .desktop-icon:hover .desktop-icon-label {
+  color: var(--os-accent);
+}
+[data-theme="amber"] .terminal-cursor {
+  background-color: var(--os-accent);
+}
+[data-theme="amber"] .glow-green {
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35), 0 0 40px rgba(245, 158, 11, 0.1);
+}
+
 @theme inline {
   --color-background: var(--os-bg);
   --color-foreground: var(--os-text);
@@ -88,6 +109,16 @@ button, a, [role="button"] {
   );
   pointer-events: none;
   z-index: 9998;
+}
+
+/* ── Dock bounce ── */
+@keyframes dockBounce {
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(-14px); }
+  50%  { transform: translateY(0); }
+  70%  { transform: translateY(-7px); }
+  85%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
 }
 
 /* ── Terminal cursor blink ── */

@@ -17,18 +17,20 @@ export type AppId =
   | "contact"
   | "certifications"
   | "now"
-  | "books";
+  | "books"
+  | "photos";
 
 export const APP_IDS: AppId[] = [
   "about",
   "projects",
-  "terminal",
-  "blog",
   "skills",
-  "contact",
   "certifications",
+  "contact",
+  "terminal",
   "now",
+  "blog",
   "books",
+  "photos",
 ];
 
 export interface WindowState {
@@ -47,7 +49,10 @@ type Action =
   | { type: "TOGGLE"; id: AppId };
 
 const initialState: WindowsState = Object.fromEntries(
-  APP_IDS.map((id) => [id, { isOpen: false, isMinimized: false, zIndex: 1 }])
+  APP_IDS.map((id) => [
+    id,
+    { isOpen: id === "about", isMinimized: false, zIndex: id === "about" ? 11 : 1 },
+  ])
 ) as WindowsState;
 
 let zCounter = 10;

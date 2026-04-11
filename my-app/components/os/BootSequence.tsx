@@ -17,7 +17,7 @@ const BOOT_LINES: BootLine[] = [
   { text: "GY-OS v1.0 — Personal System Boot", color: "#4a5568", speed: 26 },
   { text: "", speed: 0 },
   { text: "→ loading giannis.config...", color: "#00ff88", speed: 30 },
-  { text: "→ importing 9 years of field experience...", speed: 22 },
+  { text: "→ importing years of field experience...", speed: 22 },
   { text: "→ mounting /projects .................. done", speed: 16 },
   { text: "→ mounting /blog ...................... done", speed: 16 },
   { text: "→ mounting /now ....................... done", speed: 16 },

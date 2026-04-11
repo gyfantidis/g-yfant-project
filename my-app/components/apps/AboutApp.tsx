@@ -7,7 +7,7 @@ const EXPERIENCE = [
     company: "Ctrl+Space Labs",
     title: "Software Engineer",
     period: "Sep 2023 — Present",
-    location: "Athens, Greece",
+    location: "Athens, Greece - Remote",
     description:
       "Implementing Gendox — a no-code platform for building AI chat agents powered by Generative AI. Full-stack: Spring Boot REST APIs, React frontend, AWS deployments, CI/CD pipelines.",
     current: true,
@@ -15,10 +15,10 @@ const EXPERIENCE = [
   {
     company: "EASTH",
     title: "IT & Agricultural Management Consultant",
-    period: "Apr 2014 — Jan 2023",
+    period: "Jun 2009 — Jan 2023",
     location: "Kilkis, Greece",
     description:
-      "9-year tenure managing IT infrastructure, GIS field digitalization, IACS agricultural subsidy systems, and web solutions for one of Thessaloniki's largest agricultural partnerships.",
+      "14-year tenure managing IT infrastructure, GIS field digitalization, IACS agricultural subsidy systems, and web solutions for one of Thessaloniki's largest agricultural partnerships.",
     current: false,
   },
 ];
@@ -156,7 +156,7 @@ export default function AboutApp() {
                 backgroundColor: "var(--os-accent)",
               }}
             />
-            Open to opportunities
+            Hungry to learn, driven to build
           </div>
         </div>
       </div>
@@ -172,9 +172,10 @@ export default function AboutApp() {
           opacity: 0.88,
         }}
       >
-        I build systems that scale and interfaces that matter. Currently
-        pursuing an MSc in Data Science &amp; Machine Learning (DAMA). Based in
-        Athens, Greece.
+        Software engineer focused on AI-powered products and scalable systems.
+        I work across the full stack — from Spring Boot APIs to React frontends
+        to cloud infrastructure. Currently exploring the intersection of software
+        engineering and machine learning through my MSc at Hellenic Open University.
       </div>
 
       {/* ── Quick stats ── */}
@@ -186,9 +187,9 @@ export default function AboutApp() {
         }}
       >
         {[
-          { label: "Location", value: "Athens, GR" },
+          { label: "Location", value: "Kilkis, Central Macedonia, GR" },
           { label: "Degree", value: "MSc DAMA" },
-          { label: "Status", value: "Open" },
+          { label: "Focus", value: "AI & Full-Stack" },
         ].map(({ label, value }) => (
           <div
             key={label}
@@ -399,11 +400,11 @@ export default function AboutApp() {
         <SectionTitle icon="📸" label="In the wild" />
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {[
-            { src: "/profile2.jpg",        alt: "Giannis Yfantidis",  label: null,             pos: "center 35%" },
-            { src: "/profile-ngi.jpg",     alt: "NGI Forum",          label: "NGI Forum · EU", pos: "center 25%" },
-            { src: "/event-ngi.jpg",       alt: "NGI event hall",     label: "NGI Summit",     pos: "center center" },
-            { src: "/portrait-outdoor.jpg",alt: "Athens outdoors",    label: "Athens",         pos: "center 55%" },
-            { src: "/portrait-casual.jpg", alt: "Giannis Yfantidis",  label: null,             pos: "center 20%" },
+            { src: "/photos/profile2.jpg",        alt: "Giannis Yfantidis",  label: "Kilkis - GR",       pos: "center 35%" },
+            { src: "/photos/profile-ngi.jpg",     alt: "NGI Forum",          label: "NGI Forum · EU",   pos: "center 25%" },            
+            { src: "/photos/portrait-outdoor.jpg",alt: "Athens outdoors",    label: "Thessaloniki - GR",pos: "center 55%" },
+            { src: "/photos/portrait-casual.jpg", alt: "Giannis Yfantidis",  label: "Paris - FR",       pos: "center 55%" },
+            { src: "/photos/event-ngi.jpg",       alt: "NGI event hall",     label: "NGI Summit",       pos: "center center" },
           ].map(({ src, alt, label, pos }) => (
             <div
               key={src}
@@ -452,7 +453,7 @@ export default function AboutApp() {
 
       {/* ── Links ── */}
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-        <GlowButton href="https://github.com/g-yfant" variant="ghost">
+        <GlowButton href="https://github.com/gyfantidis" variant="ghost">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
           </svg>
@@ -467,7 +468,7 @@ export default function AboutApp() {
           </svg>
           LinkedIn
         </GlowButton>
-        <GlowButton href="mailto:giannis@yfantidis.gr" variant="green">
+        <GlowButton href="mailto:ggyfantidis@gmail.com" variant="green">
           ✉ Email
         </GlowButton>
       </div>

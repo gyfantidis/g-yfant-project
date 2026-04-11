@@ -17,7 +17,7 @@ interface HistoryEntry {
 const WELCOME: HistoryEntry = {
   type: "output",
   content: [
-    "GY-OS v1.0.0 — Athens Edition",
+    "Giannis-Yfantidis -OS v1.0.0 — Athens Edition",
     "Type 'help' for available commands.",
     "",
   ],
@@ -36,6 +36,17 @@ export default function TerminalApp() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [history]);
+
+  // Listen for clear event from menubar
+  useEffect(() => {
+    function onClear() {
+      setHistory([WELCOME]);
+      setInput("");
+      inputRef.current?.focus();
+    }
+    window.addEventListener("gy-os:terminal-clear", onClear);
+    return () => window.removeEventListener("gy-os:terminal-clear", onClear);
+  }, []);
 
   function handleContainerClick() {
     inputRef.current?.focus();

@@ -25,14 +25,20 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Giannis Yfantidis — DevOps & Full-Stack Engineer",
   description:
-    "Personal OS of Giannis Yfantidis — DevOps & Full-Stack Engineer, MSc Data Science & ML candidate. Based in Athens, Greece.",
+    "Personal OS of Giannis Yfantidis — DevOps & Full-Stack Engineer, MSc Data Science & ML candidate. Based in Kilkis, Central Macedonia, Greece.",
   keywords: [
     "DevOps",
     "Full-Stack",
     "React",
     "Next.js",
     "Docker",
+    "Kilkis",
+    "Central Macedonia",
+    "GR",
     "Athens",
+    "Thessaloniki",
+    "Patras",
+    "Larissa",
     "Greece",
   ],
   authors: [{ name: "Giannis Yfantidis" }],
