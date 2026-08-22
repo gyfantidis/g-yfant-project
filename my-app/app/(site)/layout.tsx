@@ -7,7 +7,10 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div
+      className="paper"
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <SiteNav />
       <main style={{ flex: 1 }}>{children}</main>
       <SiteFooter />

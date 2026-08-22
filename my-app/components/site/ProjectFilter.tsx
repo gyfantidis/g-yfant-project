@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ProjectCard from "@/components/site/ProjectCard";
+import WorkRow from "@/components/site/WorkRow";
 import { PROJECTS, ALL_TECH } from "@/lib/content";
 
 const ALL = "All";
@@ -18,8 +18,8 @@ export default function ProjectFilter() {
         style={{
           display: "flex",
           flexWrap: "wrap",
-          gap: 8,
-          marginBottom: 32,
+          gap: 7,
+          marginBottom: 34,
         }}
       >
         {[ALL, ...ALL_TECH].map((tech) => {
@@ -28,11 +28,16 @@ export default function ProjectFilter() {
             <button
               key={tech}
               onClick={() => setActive(tech)}
-              className="tag-pill"
+              className="mono"
               style={{
-                background: isActive ? "rgba(0,255,136,0.1)" : "transparent",
-                color: isActive ? "var(--os-accent)" : "var(--os-muted)",
-                border: `1px solid ${isActive ? "rgba(0,255,136,0.3)" : "var(--os-border)"}`,
+                fontSize: 10.5,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                padding: "5px 10px",
+                border: `1px solid ${isActive ? "var(--ink)" : "var(--rule)"}`,
+                background: isActive ? "var(--ink)" : "transparent",
+                color: isActive ? "var(--paper)" : "var(--ink-2)",
+                transition: "all 0.12s",
               }}
             >
               {tech}
@@ -41,14 +46,16 @@ export default function ProjectFilter() {
         })}
       </div>
 
-      <div style={{ display: "grid", gap: 18 }}>
-        {visible.map((p) => (
-          <ProjectCard key={p.title} project={p} />
+      <div className="manifest">
+        {visible.map((p, i) => (
+          <WorkRow key={p.title} project={p} index={i} />
         ))}
       </div>
 
       {visible.length === 0 && (
-        <p className="site-body">No projects use {active} yet.</p>
+        <p className="copy" style={{ paddingTop: 20 }}>
+          No projects use {active}.
+        </p>
       )}
     </>
   );

@@ -35,45 +35,29 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <article className="site-section">
-      <div className="site-container" style={{ maxWidth: 760 }}>
-        <Link
-          href="/blog"
-          className="site-nav-link"
-          style={{ display: "inline-block", marginBottom: 32 }}
-        >
-          ← writing
+    <article className="wrap" style={{ paddingBlock: "clamp(34px, 4vw, 64px)" }}>
+      <div style={{ maxWidth: 760 }}>
+        <Link href="/blog" className="nav-link" style={{ display: "inline-block" }}>
+          ← Writing
         </Link>
 
         <div
-          style={{
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 12,
-            color: "var(--os-muted)",
-            marginBottom: 14,
-          }}
+          className="meta"
+          style={{ marginTop: 34, paddingBottom: 12, borderBottom: "1px solid var(--rule)" }}
         >
-          {post.date} · {post.readingTime} read
+          {post.date} — {post.readingTime} read
         </div>
 
         <h1
-          className="site-h1"
-          style={{ fontSize: "clamp(28px, 4vw, 44px)", marginBottom: 20 }}
+          className="headline"
+          style={{ marginTop: 26, marginBottom: 22, letterSpacing: "-0.035em" }}
         >
           {post.title}
         </h1>
 
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginBottom: 40 }}>
+        <div style={{ marginBottom: 40 }}>
           {post.tags.map((t) => (
-            <span
-              key={t}
-              className="tag-pill"
-              style={{
-                background: "rgba(255,255,255,0.035)",
-                color: "var(--os-muted)",
-                border: "1px solid var(--os-border)",
-              }}
-            >
+            <span key={t} className="row-tech">
               {t}
             </span>
           ))}

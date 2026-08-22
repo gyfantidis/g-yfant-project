@@ -23,7 +23,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
     period: "Jun 2009 — Jan 2023",
     location: "Kilkis, Greece",
     description:
-      "14-year tenure managing IT infrastructure, GIS field digitalization, IACS agricultural subsidy systems, and web solutions for one of Thessaloniki's largest agricultural partnerships.",
+      "Managed IT infrastructure, data digitalization and internal web systems for a large partnership in Northern Greece.",
     current: false,
   },
 ];
@@ -50,7 +50,10 @@ export const EDUCATION: EducationEntry[] = [
   },
 ];
 
-/** Condensed career arc for the homepage story section. */
+/**
+ * Career track. Only surfaced on /about — the site leads with current work,
+ * not with the path that got here.
+ */
 export interface TimelineEntry {
   year: string;
   label: string;
@@ -58,10 +61,10 @@ export interface TimelineEntry {
 }
 
 export const TIMELINE: TimelineEntry[] = [
-  { year: "2009", label: "EASTH", detail: "IT & agricultural consulting in Kilkis." },
-  { year: "2017", label: "Back to school", detail: "Started a CS degree while working full-time." },
-  { year: "2022", label: "BSc Computer Science", detail: "Graduated from Hellenic Open University." },
-  { year: "2023", label: "Ctrl+Space Labs", detail: "Career switch to software engineering." },
-  { year: "2024", label: "MSc DAMA", detail: "Data Science & Machine Learning." },
-  { year: "2026", label: "Today", detail: "Building AI agent platforms and shipping side projects." },
+  { year: "2022", label: "BSc Computer Science", detail: "Hellenic Open University." },
+  { year: "2023", label: "Ctrl+Space Labs", detail: "Joined as a software engineer, building Gendox." },
+  { year: "2024", label: "ProvenAI", detail: "Shipped an NGI TrustChain research project on AI data provenance." },
+  { year: "2024", label: "MSc DAMA", detail: "Started Data Science & Machine Learning." },
+  { year: "2025", label: "oneprompt.gr", detail: "Launched and self-hosted a Greek-language AI product." },
+  { year: "2026", label: "Today", detail: "Expanding Gendox, finishing the MSc." },
 ];

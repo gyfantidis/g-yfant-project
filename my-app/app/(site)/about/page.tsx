@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Section from "@/components/site/Section";
+import Marker from "@/components/site/Marker";
+import MachineBand from "@/components/site/MachineBand";
 import {
   PROFILE,
   EXPERIENCE,
   EDUCATION,
+  TIMELINE,
   CERTS,
-  BADGE_COLORS,
 } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -14,202 +15,234 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const current = EXPERIENCE.filter((e) => e.current);
+  const earlier = EXPERIENCE.filter((e) => !e.current);
+
   return (
     <>
-      <Section num="01" label="about">
-        <h1
-          className="site-h1"
-          style={{ fontSize: "clamp(32px, 4.5vw, 50px)", marginBottom: 22 }}
-        >
-          About
-        </h1>
-        <div style={{ maxWidth: 660, display: "grid", gap: 20 }}>
-          <p className="site-lead">{PROFILE.intro}</p>
-          <p className="site-lead">
-            The fourteen years before software were not a detour. Managing GIS
-            digitalization and IACS subsidy systems for hundreds of farmers
-            meant owning uptime, data integrity and the phone call when
-            something broke. That is the same job I do now, with a different
-            stack.
+      <header className="wrap" style={{ paddingBlock: "clamp(40px, 5vw, 76px)" }}>
+        <h1 className="display">About</h1>
+        <div style={{ marginTop: 30, maxWidth: "60ch", display: "grid", gap: 18 }}>
+          <p className="lede">{PROFILE.intro}</p>
+          <p className="copy">
+            Day to day that means Spring Boot services and React frontends,
+            RAG pipelines and agent integrations, and the Docker, GitHub
+            Actions and Coolify plumbing that gets them into production. I run
+            my own infrastructure for side projects, which is the fastest way I
+            know to stay honest about how systems actually break.
           </p>
-          <p className="site-lead">
-            These days I build Gendox at Ctrl+Space Labs — a no-code platform
-            for AI chat agents — and I am finishing an MSc in Data Science and
-            Machine Learning at the Hellenic Open University.
+          <p className="copy">
+            Alongside the job I am finishing an MSc in Data Science and Machine
+            Learning at the Hellenic Open University — mostly so the ML half of
+            what I build rests on something firmer than intuition.
           </p>
         </div>
-      </Section>
+      </header>
 
-      {/* ── Experience ── */}
-      <Section num="02" label="experience">
-        <div style={{ display: "grid", gap: 18 }}>
-          {EXPERIENCE.map((job) => (
-            <div
-              key={job.company}
-              className="site-card"
-              style={{ padding: "24px 26px" }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "baseline",
-                  gap: 12,
-                  marginBottom: 6,
-                }}
-              >
-                <h2
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: "var(--os-text)",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {job.title}
-                </h2>
-                {job.current && (
+      {/* ── Current work ── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="01" label="Current" rest="Where I am now" />
+          <div className="manifest">
+            {current.map((job, i) => (
+              <div key={job.company} className="row">
+                <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
+                <span>
+                  <span className="row-title">{job.title}</span>
                   <span
-                    className="tag-pill"
+                    className="mono"
                     style={{
-                      background: "rgba(0,255,136,0.12)",
-                      color: "var(--os-accent)",
+                      display: "block",
+                      fontSize: 12,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "var(--mark)",
+                      marginTop: 8,
                     }}
                   >
-                    Current
+                    {job.company} — {job.location}
                   </span>
-                )}
+                  <span className="row-sub" style={{ display: "block" }}>
+                    {job.description}
+                  </span>
+                </span>
+                <span className="row-tail">{job.period}</span>
               </div>
-              <div
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Track ── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="02" label="Track" rest="2022 → today" />
+          <ol
+            style={{
+              listStyle: "none",
+              display: "grid",
+              gap: 0,
+              maxWidth: 720,
+            }}
+          >
+            {TIMELINE.map((t, i) => (
+              <li
+                key={`${t.year}-${t.label}`}
                 style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 12.5,
-                  color: "var(--os-muted)",
-                  marginBottom: 14,
+                  display: "grid",
+                  gridTemplateColumns: "72px minmax(0, 1fr)",
+                  gap: 18,
+                  paddingBlock: 16,
+                  borderBottom:
+                    i === TIMELINE.length - 1 ? "none" : "1px solid var(--rule)",
                 }}
               >
-                {job.company} · {job.period} · {job.location}
-              </div>
-              <p className="site-body">{job.description}</p>
-            </div>
-          ))}
+                <span
+                  className="mono"
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: i === TIMELINE.length - 1 ? "var(--mark)" : "var(--ink-3)",
+                  }}
+                >
+                  {t.year}
+                </span>
+                <span>
+                  <span
+                    className="mono"
+                    style={{
+                      display: "block",
+                      fontSize: 15,
+                      fontWeight: 700,
+                      letterSpacing: "-0.01em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {t.label}
+                  </span>
+                  <span className="copy" style={{ display: "block", marginTop: 4 }}>
+                    {t.detail}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
-      </Section>
+      </section>
 
       {/* ── Education ── */}
-      <Section num="03" label="education">
-        <div style={{ display: "grid", gap: 14 }}>
-          {EDUCATION.map((ed) => (
-            <div
-              key={ed.degree}
-              className="site-card"
-              style={{ padding: "20px 24px" }}
-            >
-              <div
-                style={{
-                  fontSize: 17,
-                  fontWeight: 600,
-                  color: "var(--os-text)",
-                  marginBottom: 5,
-                }}
-              >
-                {ed.degree}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="03" label="Education" />
+          <div className="manifest">
+            {EDUCATION.map((ed, i) => (
+              <div key={ed.degree} className="row">
+                <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
+                <span>
+                  <span
+                    className="mono"
+                    style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.01em" }}
+                  >
+                    {ed.degree}
+                  </span>
+                  <span className="row-sub" style={{ display: "block", marginTop: 6 }}>
+                    {ed.school}
+                  </span>
+                </span>
+                <span
+                  className="row-tail"
+                  style={{ color: ed.active ? "var(--mark)" : undefined }}
+                >
+                  {ed.period}
+                  {ed.active && " · in progress"}
+                </span>
               </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 12.5,
-                  color: ed.active ? "var(--os-accent)" : "var(--os-muted)",
-                }}
-              >
-                {ed.school} · {ed.period}
-                {ed.active && " · in progress"}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* ── Certifications ── */}
-      <Section num="04" label="certifications">
-        <div
-          style={{
-            display: "grid",
-            gap: 12,
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          }}
-        >
-          {CERTS.map((cert) => {
-            const badge = cert.badge ? BADGE_COLORS[cert.badge] : undefined;
-            const body = (
-              <>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                    marginBottom: 8,
-                  }}
-                >
-                  {badge && (
+      <section className="band">
+        <div className="wrap">
+          <Marker num="04" label="Certifications" rest={`${CERTS.length} total`} />
+          <div className="manifest">
+            {CERTS.map((cert, i) => {
+              const body = (
+                <>
+                  <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
+                  <span>
                     <span
-                      className="tag-pill"
-                      style={{ background: badge.bg, color: badge.color }}
+                      className="mono"
+                      style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.005em" }}
                     >
-                      {badge.label}
+                      {cert.name}
                     </span>
-                  )}
-                  <span
-                    style={{
-                      fontFamily: "var(--font-jetbrains), monospace",
-                      fontSize: 11.5,
-                      color: "var(--os-muted)",
-                      marginLeft: "auto",
-                    }}
-                  >
-                    {cert.date}
+                    <span className="row-sub" style={{ display: "block", marginTop: 5 }}>
+                      {cert.issuer}
+                    </span>
                   </span>
-                </div>
-                <div
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: "var(--os-text)",
-                    lineHeight: 1.4,
-                    marginBottom: 4,
-                  }}
+                  <span className="row-tail">
+                    {cert.date}
+                    {cert.url && " ↗"}
+                  </span>
+                </>
+              );
+              return cert.url ? (
+                <a
+                  key={cert.name}
+                  className="row"
+                  href={cert.url}
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  {cert.name}
+                  {body}
+                </a>
+              ) : (
+                <div key={cert.name} className="row">
+                  {body}
                 </div>
-                <div style={{ fontSize: 13, color: "var(--os-muted)" }}>
-                  {cert.issuer}
-                </div>
-              </>
-            );
-
-            return cert.url ? (
-              <a
-                key={cert.name}
-                href={cert.url}
-                target="_blank"
-                rel="noreferrer"
-                className="site-card"
-                style={{ padding: "18px 20px", textDecoration: "none", display: "block" }}
-              >
-                {body}
-              </a>
-            ) : (
-              <div
-                key={cert.name}
-                className="site-card"
-                style={{ padding: "18px 20px" }}
-              >
-                {body}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </Section>
+      </section>
+
+      {/* ── Earlier ── */}
+      {earlier.length > 0 && (
+        <section className="band">
+          <div className="wrap">
+            <Marker num="05" label="Earlier" rest="Before engineering" />
+            {earlier.map((job) => (
+              <div
+                key={job.company}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "minmax(0, 1fr) auto",
+                  gap: 20,
+                  alignItems: "baseline",
+                  maxWidth: 820,
+                }}
+              >
+                <div>
+                  <span
+                    className="mono"
+                    style={{ fontSize: 14, fontWeight: 500 }}
+                  >
+                    {job.title} — {job.company}
+                  </span>
+                  <p className="copy" style={{ marginTop: 6, fontSize: 15 }}>
+                    {job.description}
+                  </p>
+                </div>
+                <span className="row-tail">{job.period}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <MachineBand />
     </>
   );
 }

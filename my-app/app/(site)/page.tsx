@@ -1,409 +1,280 @@
 import Link from "next/link";
-import Section from "@/components/site/Section";
-import OsPreview from "@/components/site/OsPreview";
-import ProjectCard from "@/components/site/ProjectCard";
+import Marker from "@/components/site/Marker";
+import WorkRow from "@/components/site/WorkRow";
+import Marquee from "@/components/site/Marquee";
+import MachineBand from "@/components/site/MachineBand";
 import {
   PROFILE,
   SOCIALS,
+  STATS,
   TRUST_BAR,
   FEATURED_PROJECTS,
-  TIMELINE,
+  PROJECTS,
   CATEGORIES,
-  levelOpacity,
   RECENT_POSTS,
 } from "@/lib/content";
+
+const STACK_TICKER = CATEGORIES.flatMap((c) => c.skills.map((s) => s.name));
 
 export default function HomePage() {
   return (
     <>
-      {/* ── 00 · Hero ─────────────────────────────────────────── */}
-      <section style={{ paddingBlock: "clamp(56px, 8vw, 104px)" }}>
+      {/* ── Hero ──────────────────────────────────────────────── */}
+      <header className="wrap" style={{ paddingBlock: "clamp(40px, 6vw, 88px)" }}>
+        <h1 className="display">
+          {PROFILE.firstName}
+          <br />
+          {PROFILE.lastName}
+        </h1>
+
         <div
-          className="site-container"
+          className="mono"
           style={{
-            display: "grid",
-            gap: "clamp(40px, 5vw, 64px)",
-            gridTemplateColumns: "minmax(0, 1fr)",
-            alignItems: "center",
+            marginTop: "clamp(20px, 3vw, 34px)",
+            paddingTop: 14,
+            borderTop: "1px solid var(--rule)",
+            fontSize: "clamp(10px, 1.25vw, 12.5px)",
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            color: "var(--ink)",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "8px 14px",
           }}
         >
-          <div style={{ maxWidth: 620 }}>
-            {PROFILE.available && (
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 9,
-                  marginBottom: 24,
-                  padding: "6px 13px",
-                  borderRadius: 9999,
-                  border: "1px solid rgba(0,255,136,0.2)",
-                  background: "rgba(0,255,136,0.06)",
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 12,
-                  color: "var(--os-accent)",
-                }}
-              >
-                <span className="site-status-dot" />
-                {PROFILE.availableLabel}
-              </div>
-            )}
+          {PROFILE.focus.map((f, i) => (
+            <span key={f}>
+              {f}
+              {i < PROFILE.focus.length - 1 && (
+                <span style={{ color: "var(--mark)", marginLeft: 14 }}>/</span>
+              )}
+            </span>
+          ))}
+        </div>
 
-            <h1 className="site-h1" style={{ marginBottom: 18 }}>
-              {PROFILE.name}
-            </h1>
+        <div className="hero-grid" style={{ marginTop: "clamp(30px, 4vw, 54px)" }}>
+          <div style={{ maxWidth: "62ch" }}>
+            <p className="lede">{PROFILE.intro}</p>
+            <p className="copy" style={{ marginTop: 18 }}>
+              {PROFILE.subIntro}
+            </p>
 
-            <p
+            <div
               style={{
-                fontFamily: "var(--font-jetbrains), monospace",
-                fontSize: "clamp(13px, 1.4vw, 15px)",
-                color: "var(--os-accent)",
-                marginBottom: 22,
-                letterSpacing: "0.01em",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 12,
+                marginTop: 32,
               }}
             >
-              {PROFILE.role} · {PROFILE.locationShort}
-            </p>
-
-            <p className="site-lead" style={{ marginBottom: 34, maxWidth: 560 }}>
-              {PROFILE.intro}
-            </p>
-
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-              <Link
-                href="/os"
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 14,
-                  padding: "12px 22px",
-                  borderRadius: 9,
-                  background: "rgba(0,255,136,0.1)",
-                  border: "1px solid rgba(0,255,136,0.35)",
-                  color: "var(--os-accent)",
-                  textDecoration: "none",
-                }}
-                className="glow-green"
-              >
-                $ ./launch-os.sh
+              <Link href="/projects" className="ink-btn">
+                View the work <span aria-hidden>→</span>
               </Link>
-              <a
-                href="#work"
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 14,
-                  padding: "12px 22px",
-                  borderRadius: 9,
-                  background: "var(--os-surface)",
-                  border: "1px solid var(--os-border)",
-                  color: "var(--os-text)",
-                  textDecoration: "none",
-                }}
-              >
-                See the work ↓
+              <a href={SOCIALS.email} className="ghost-btn">
+                Get in touch
               </a>
             </div>
-
-            <p
-              style={{
-                marginTop: 16,
-                fontFamily: "var(--font-jetbrains), monospace",
-                fontSize: 11.5,
-                color: "var(--os-muted)",
-              }}
-            >
-              A portfolio built as an operating system. Best on desktop.
-            </p>
           </div>
 
-          <div style={{ maxWidth: 560, width: "100%" }}>
-            <OsPreview />
+          {/* Right-hand register */}
+          <dl
+            style={{
+              display: "grid",
+              gap: 16,
+              alignContent: "start",
+              borderTop: "1px solid var(--rule)",
+              paddingTop: 18,
+              minWidth: 0,
+            }}
+          >
+            {PROFILE.available && (
+              <div>
+                <dt className="meta">Status</dt>
+                <dd
+                  className="mono"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 9,
+                    fontSize: 13,
+                    color: "var(--mark)",
+                    marginTop: 5,
+                  }}
+                >
+                  <span className="blip" />
+                  {PROFILE.availableLabel}
+                </dd>
+              </div>
+            )}
+            <div>
+              <dt className="meta">Based in</dt>
+              <dd className="mono" style={{ fontSize: 13, marginTop: 5 }}>
+                {PROFILE.location}
+              </dd>
+            </div>
+            <div>
+              <dt className="meta">Currently</dt>
+              <dd className="mono" style={{ fontSize: 13, marginTop: 5 }}>
+                Ctrl+Space Labs — Gendox
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </header>
+
+      {/* ── Stack ticker ──────────────────────────────────────── */}
+      <Marquee items={STACK_TICKER} />
+
+      {/* ── 01 Index ──────────────────────────────────────────── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="01" label="Index" rest={TRUST_BAR.join("  ·  ")} />
+          <div
+            style={{
+              display: "grid",
+              gap: "clamp(24px, 4vw, 40px)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            }}
+          >
+            {STATS.map((s) => (
+              <div key={s.label}>
+                <div className="stat-value">{s.value}</div>
+                <div className="stat-label">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Trust bar ─────────────────────────────────────────── */}
-      <div
-        style={{
-          borderBlock: "1px solid var(--os-border)",
-          paddingBlock: 18,
-          background: "var(--os-surface)",
-        }}
-      >
-        <div
-          className="site-container"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "10px 32px",
-            justifyContent: "center",
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 12,
-            color: "var(--os-muted)",
-            letterSpacing: "0.04em",
-          }}
-        >
-          {TRUST_BAR.map((name) => (
-            <span key={name}>{name}</span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── 01 · Selected work ────────────────────────────────── */}
-      <Section num="01" label="selected work" id="work">
-        <h2 className="site-h2" style={{ marginBottom: 14 }}>
-          Things I&apos;ve built
-        </h2>
-        <p className="site-lead" style={{ marginBottom: 40, maxWidth: 620 }}>
-          AI platforms at work, an EU research project, and a Greek-language
-          product I run end to end on my own infrastructure.
-        </p>
-
-        <div style={{ display: "grid", gap: 18 }}>
-          {FEATURED_PROJECTS.map((p) => (
-            <ProjectCard key={p.title} project={p} />
-          ))}
-        </div>
-
-        <Link
-          href="/projects"
-          className="site-link"
-          style={{
-            display: "inline-block",
-            marginTop: 28,
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 13,
-          }}
-        >
-          See all projects →
-        </Link>
-      </Section>
-
-      {/* ── 02 · The story ────────────────────────────────────── */}
-      <Section num="02" label="the story">
-        <h2 className="site-h2" style={{ marginBottom: 14 }}>
-          Fourteen years in agriculture, then a career rebuilt around code
-        </h2>
-        <p className="site-lead" style={{ marginBottom: 44, maxWidth: 660 }}>
-          I did not come out of a bootcamp at 22. I ran IT infrastructure, GIS
-          digitalization and IACS subsidy systems for a large agricultural
-          partnership in Kilkis — real users, real deadlines, no room for
-          things to be down. Then I went back to school while working full
-          time, and rebuilt everything around software. What carried over is
-          the part that matters most: shipping systems people actually depend on.
-        </p>
-
-        <ol
-          style={{
-            listStyle: "none",
-            display: "grid",
-            gap: 0,
-            borderLeft: "1px solid var(--os-border)",
-          }}
-        >
-          {TIMELINE.map((t, i) => (
-            <li
-              key={t.year}
-              style={{
-                position: "relative",
-                paddingLeft: 26,
-                paddingBottom: i === TIMELINE.length - 1 ? 0 : 26,
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  left: -4.5,
-                  top: 6,
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background:
-                    i === TIMELINE.length - 1 ? "var(--os-accent)" : "var(--os-border)",
-                  border: "2px solid var(--os-bg)",
-                  boxSizing: "content-box",
-                }}
-              />
-              <div
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 12,
-                  color: "var(--os-accent)",
-                  marginBottom: 3,
-                }}
-              >
-                {t.year}
-              </div>
-              <div
-                style={{
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: "var(--os-text)",
-                  marginBottom: 3,
-                }}
-              >
-                {t.label}
-              </div>
-              <div className="site-body" style={{ fontSize: 14.5 }}>
-                {t.detail}
-              </div>
-            </li>
-          ))}
-        </ol>
-      </Section>
-
-      {/* ── 03 · Stack ────────────────────────────────────────── */}
-      <Section num="03" label="stack">
-        <h2 className="site-h2" style={{ marginBottom: 40 }}>
-          What I work with
-        </h2>
-
-        <div
-          style={{
-            display: "grid",
-            gap: 28,
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          }}
-        >
-          {CATEGORIES.map((cat) => (
-            <div key={cat.id}>
-              <div
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 12,
-                  color: cat.color,
-                  marginBottom: 14,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {cat.icon} {cat.label}
-              </div>
-              <ul style={{ listStyle: "none", display: "grid", gap: 8 }}>
-                {cat.skills.map((s) => (
-                  <li
-                    key={s.name}
-                    style={{
-                      fontSize: 15,
-                      color: "var(--os-text)",
-                      opacity: levelOpacity[s.level ?? "proficient"],
-                    }}
-                  >
-                    {s.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ── 04 · Writing ──────────────────────────────────────── */}
-      <Section num="04" label="writing">
-        <h2 className="site-h2" style={{ marginBottom: 40 }}>
-          Notes from the work
-        </h2>
-
-        <div style={{ display: "grid", gap: 14 }}>
-          {RECENT_POSTS.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="site-card"
-              style={{ display: "block", padding: "22px 24px", textDecoration: "none" }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: 11.5,
-                  color: "var(--os-muted)",
-                  marginBottom: 8,
-                }}
-              >
-                {post.date} · {post.readingTime}
-              </div>
-              <h3
-                style={{
-                  fontSize: 18,
-                  fontWeight: 600,
-                  color: "var(--os-text)",
-                  marginBottom: 8,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {post.title}
-              </h3>
-              <p className="site-body" style={{ fontSize: 14.5 }}>
-                {post.excerpt}
-              </p>
-            </Link>
-          ))}
-        </div>
-
-        <Link
-          href="/blog"
-          className="site-link"
-          style={{
-            display: "inline-block",
-            marginTop: 28,
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 13,
-          }}
-        >
-          All posts →
-        </Link>
-      </Section>
-
-      {/* ── 05 · Contact ──────────────────────────────────────── */}
-      <Section num="05" label="contact">
-        <h2 className="site-h2" style={{ marginBottom: 14 }}>
-          Let&apos;s talk
-        </h2>
-        <p className="site-lead" style={{ marginBottom: 30, maxWidth: 560 }}>
-          Open to remote roles in AI and platform engineering. The fastest way
-          to reach me is email.
-        </p>
-
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-          <a
-            href={SOCIALS.email}
+      {/* ── 02 Selected work ──────────────────────────────────── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker
+            num="02"
+            label="Selected work"
+            rest={`${PROJECTS.length} entries`}
+          />
+          <div className="manifest">
+            {FEATURED_PROJECTS.map((p, i) => (
+              <WorkRow key={p.title} project={p} index={i} />
+            ))}
+          </div>
+          <Link
+            href="/projects"
+            className="mono"
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
-              fontSize: 14,
-              padding: "12px 22px",
-              borderRadius: 9,
-              background: "rgba(0,255,136,0.1)",
-              border: "1px solid rgba(0,255,136,0.35)",
-              color: "var(--os-accent)",
-              textDecoration: "none",
+              display: "inline-block",
+              marginTop: 26,
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--mark)",
+              textDecoration: "underline",
+              textUnderlineOffset: 5,
             }}
           >
-            {PROFILE.email}
-          </a>
-          {[
-            { href: SOCIALS.linkedin, label: "LinkedIn" },
-            { href: SOCIALS.github, label: "GitHub" },
-          ].map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                fontFamily: "var(--font-jetbrains), monospace",
-                fontSize: 14,
-                padding: "12px 22px",
-                borderRadius: 9,
-                background: "var(--os-surface)",
-                border: "1px solid var(--os-border)",
-                color: "var(--os-text)",
-                textDecoration: "none",
-              }}
-            >
-              {l.label} ↗
-            </a>
-          ))}
+            All {PROJECTS.length} projects →
+          </Link>
         </div>
-      </Section>
+      </section>
+
+      {/* ── 03 Stack ──────────────────────────────────────────── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="03" label="Stack" rest="What I reach for" />
+          <div
+            style={{
+              display: "grid",
+              gap: "clamp(26px, 4vw, 44px)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            }}
+          >
+            {CATEGORIES.map((cat) => (
+              <div key={cat.id}>
+                <div
+                  className="mono"
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "var(--mark)",
+                    paddingBottom: 10,
+                    marginBottom: 14,
+                    borderBottom: "1px solid var(--rule)",
+                  }}
+                >
+                  {cat.label}
+                </div>
+                <ul style={{ listStyle: "none", display: "grid", gap: 9 }}>
+                  {cat.skills.map((s) => (
+                    <li
+                      key={s.name}
+                      className="mono"
+                      style={{
+                        fontSize: 14,
+                        color: s.level === "core" ? "var(--ink)" : "var(--ink-3)",
+                      }}
+                    >
+                      {s.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 04 Writing ────────────────────────────────────────── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="04" label="Writing" rest="Notes from the work" />
+          <div className="manifest">
+            {RECENT_POSTS.map((post, i) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="row">
+                <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
+                <span>
+                  <span className="row-title">{post.title}</span>
+                  <span className="row-sub" style={{ display: "block" }}>
+                    {post.excerpt}
+                  </span>
+                </span>
+                <span className="row-tail">
+                  {post.date} · {post.readingTime}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 05 Contact ────────────────────────────────────────── */}
+      <section className="band">
+        <div className="wrap">
+          <Marker num="05" label="Contact" rest={PROFILE.locationShort} />
+          <h2 className="headline" style={{ maxWidth: "14ch", marginBottom: 26 }}>
+            Building something with AI?
+          </h2>
+          <p className="lede" style={{ maxWidth: "48ch", marginBottom: 32 }}>
+            Open to remote roles in AI and platform engineering. Email is the
+            fastest way to reach me.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <a href={SOCIALS.email} className="ink-btn">
+              {PROFILE.email}
+            </a>
+            <a href={SOCIALS.linkedin} target="_blank" rel="noreferrer" className="ghost-btn">
+              LinkedIn ↗
+            </a>
+            <a href={SOCIALS.github} target="_blank" rel="noreferrer" className="ghost-btn">
+              GitHub ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 06 The machine ────────────────────────────────────── */}
+      <MachineBand />
     </>
   );
 }

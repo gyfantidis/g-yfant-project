@@ -1,39 +1,36 @@
-import Link from "next/link";
 import { PROFILE, SOCIALS } from "@/lib/content";
 
 export default function SiteFooter() {
   return (
-    <footer style={{ borderTop: "1px solid var(--os-border)", paddingBlock: 40 }}>
+    <footer style={{ borderTop: "1px solid var(--rule)" }}>
       <div
-        className="site-container"
+        className="wrap"
         style={{
           display: "flex",
           flexWrap: "wrap",
-          gap: 20,
-          alignItems: "center",
+          gap: "18px 32px",
+          alignItems: "baseline",
           justifyContent: "space-between",
-          fontFamily: "var(--font-jetbrains), monospace",
-          fontSize: 12,
-          color: "var(--os-muted)",
+          paddingBlock: 34,
         }}
       >
-        <span>
-          © {new Date().getFullYear()} {PROFILE.name} · {PROFILE.locationShort}
+        <span className="meta">
+          © {new Date().getFullYear()} {PROFILE.name} — {PROFILE.locationShort}
         </span>
 
-        <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-          <a className="site-nav-link" href={SOCIALS.github} target="_blank" rel="noreferrer">
+        <div style={{ display: "flex", gap: 22, flexWrap: "wrap" }}>
+          <a className="nav-link" href={SOCIALS.github} target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a className="site-nav-link" href={SOCIALS.linkedin} target="_blank" rel="noreferrer">
+          <a className="nav-link" href={SOCIALS.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
           </a>
-          <a className="site-nav-link" href={SOCIALS.email}>
+          <a className="nav-link" href={SOCIALS.email}>
             Email
           </a>
-          <Link className="site-nav-link" href="/os">
-            OS ↗
-          </Link>
+          <a className="nav-link" href="/os" target="_blank" rel="noopener">
+            OS ⧉
+          </a>
         </div>
       </div>
     </footer>

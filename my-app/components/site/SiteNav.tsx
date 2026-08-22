@@ -5,48 +5,48 @@ import { usePathname } from "next/navigation";
 import { PROFILE } from "@/lib/content";
 
 const LINKS = [
-  { href: "/projects", label: "work" },
-  { href: "/about", label: "about" },
-  { href: "/blog", label: "writing" },
-  { href: "/now", label: "now" },
+  { href: "/projects", label: "Work" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Writing" },
+  { href: "/now", label: "Now" },
 ];
 
 export default function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="site-nav">
+    <nav className="nav">
       <div
-        className="site-container"
+        className="wrap"
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 20,
-          height: 60,
+          gap: 18,
+          minHeight: 58,
+          paddingBlock: 10,
         }}
       >
         <Link
           href="/"
+          className="mono"
           style={{
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: 14,
-            fontWeight: 600,
-            color: "var(--os-text)",
+            fontSize: 12,
+            fontWeight: 700,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: "var(--ink)",
             textDecoration: "none",
             whiteSpace: "nowrap",
           }}
         >
-          {PROFILE.name.split(" ")[0].toLowerCase()}
-          <span style={{ color: "var(--os-accent)" }}>.</span>
-          {PROFILE.name.split(" ")[1].toLowerCase()}
+          {PROFILE.lastName}
+          <span style={{ color: "var(--mark)" }}>*</span>
         </Link>
 
-        {/* Scrolls horizontally on narrow screens rather than disappearing */}
         <div
           style={{
             display: "flex",
             gap: 20,
-            marginLeft: 4,
             alignItems: "center",
             overflowX: "auto",
             scrollbarWidth: "none",
@@ -57,25 +57,38 @@ export default function SiteNav() {
             <Link
               key={l.href}
               href={l.href}
-              className="site-nav-link"
+              className="nav-link"
               data-active={pathname.startsWith(l.href)}
-              style={{ whiteSpace: "nowrap" }}
             >
               {l.label}
             </Link>
           ))}
         </div>
 
-        <div style={{ flex: 1 }} />
+        <div style={{ flex: 1, minWidth: 8 }} />
 
-        <div className="site-mode-toggle">
-          <Link href="/" data-active={true}>
-            Site
-          </Link>
-          <Link href="/os" data-active={false}>
-            OS
-          </Link>
-        </div>
+        {/* The OS opens in its own tab — it is a separate world, not a page. */}
+        <a
+          href="/os"
+          target="_blank"
+          rel="noopener"
+          className="mono"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 11,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            padding: "8px 13px",
+            background: "var(--ink)",
+            color: "var(--paper)",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Launch OS <span aria-hidden>⧉</span>
+        </a>
       </div>
     </nav>
   );
