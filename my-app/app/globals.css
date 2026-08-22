@@ -52,22 +52,33 @@
 }
 
 html, body {
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
   background-color: var(--os-bg);
   color: var(--os-text);
   font-family: var(--font-dmsans), 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-#__next, main {
+body {
+  scroll-behavior: smooth;
+}
+
+/*
+ * OS route only. `os-mode` is toggled on <html> by app/os/layout.tsx, so the
+ * marketing site keeps normal document scrolling while the OS locks the viewport.
+ */
+html.os-mode,
+html.os-mode body {
+  height: 100%;
+  overflow: hidden;
+}
+html.os-mode body {
+  cursor: crosshair;
+}
+html.os-mode main {
   height: 100%;
 }
 
-/* ── Custom crosshair cursor ── */
-body {
-  cursor: crosshair;
-}
 input, textarea {
   cursor: text;
 }
@@ -249,7 +260,6 @@ button, a, [role="button"] {
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  body { overflow: auto; }
   .os-window {
     border-radius: 0;
     border: none;
@@ -266,3 +276,156 @@ button, a, [role="button"] {
     min-height: 44px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Marketing site
+   Calm, spacious counterpart to the OS. Same palette and accent,
+   none of the chrome: no scanlines, no particle grid, no crosshair.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* A comfortable scrollbar for long documents (the OS keeps its 4px one) */
+html:not(.os-mode) ::-webkit-scrollbar { width: 10px; height: 10px; }
+html:not(.os-mode) ::-webkit-scrollbar-thumb { border-radius: 5px; }
+
+.site-container {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.site-section {
+  padding-block: clamp(64px, 9vw, 128px);
+}
+
+/* "01 / selected work" — keeps the OS's monospace DNA without the noise */
+.site-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--os-muted);
+  margin-bottom: 28px;
+}
+.site-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--os-border);
+}
+.site-eyebrow-num { color: var(--os-accent); }
+
+.site-h1 {
+  font-family: var(--font-dmsans), sans-serif;
+  font-size: clamp(38px, 6.2vw, 68px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.site-h2 {
+  font-family: var(--font-dmsans), sans-serif;
+  font-size: clamp(26px, 3.4vw, 38px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.site-lead {
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.65;
+  color: #94a3b8;
+}
+.site-body {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: #94a3b8;
+}
+
+/* Links inside prose */
+.site-link {
+  color: var(--os-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.25);
+  transition: border-color 0.15s;
+}
+.site-link:hover { border-bottom-color: var(--os-accent); }
+
+/* Cards */
+.site-card {
+  background: var(--os-surface);
+  border: 1px solid var(--os-border);
+  border-radius: 14px;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+.site-card:hover {
+  border-color: rgba(0, 255, 136, 0.28);
+  background: var(--os-surface-2);
+  transform: translateY(-2px);
+}
+
+/* Nav */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--os-border);
+}
+.site-nav-link {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 13px;
+  color: var(--os-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.site-nav-link:hover,
+.site-nav-link[data-active="true"] { color: var(--os-text); }
+
+/* [ Site │ OS ] segmented toggle */
+.site-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--os-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--os-surface);
+}
+.site-mode-toggle a {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 12px;
+  padding: 6px 14px;
+  text-decoration: none;
+  color: var(--os-muted);
+  transition: background 0.15s, color 0.15s;
+}
+.site-mode-toggle a[data-active="true"] {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--os-accent);
+}
+.site-mode-toggle a:not([data-active="true"]):hover { color: var(--os-text); }
+
+/* Availability dot */
+@keyframes availablePulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+.site-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--os-accent);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.7);
+  animation: availablePulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-status-dot { animation: none; }
+  .site-card:hover { transform: none; }
+}
+
+/* Hide the scrollbar on the nav's horizontal overflow (mobile) */
+.site-nav ::-webkit-scrollbar { display: none; }

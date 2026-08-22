@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, DM_Sans } from "next/font/google";
+import { PROFILE } from "@/lib/content";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -20,12 +21,16 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#0a0a0f",
 };
 
 export const metadata: Metadata = {
-  title: "Giannis Yfantidis — DevOps & Full-Stack Engineer",
+  title: {
+    default: `${PROFILE.name} — ${PROFILE.role}`,
+    template: `%s — ${PROFILE.name}`,
+  },
   description:
-    "Personal OS of Giannis Yfantidis — DevOps & Full-Stack Engineer, MSc Data Science & ML candidate. Based in Kilkis, Central Macedonia, Greece.",
+    "Full-Stack & DevOps Engineer building AI agent platforms. MSc Data Science & ML candidate, based in Kilkis, Greece.",
   keywords: [
     "DevOps",
     "Full-Stack",
@@ -41,18 +46,18 @@ export const metadata: Metadata = {
     "Larissa",
     "Greece",
   ],
-  authors: [{ name: "Giannis Yfantidis" }],
+  authors: [{ name: PROFILE.name }],
   openGraph: {
-    title: "Giannis Yfantidis — DevOps & Full-Stack Engineer",
+    title: `${PROFILE.name} — ${PROFILE.role}`,
     description:
-      "Interactive personal OS portfolio. Boot in, explore the stack, open a terminal.",
+      "Engineering portfolio — selected work, writing, and an interactive OS you can boot into.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Giannis Yfantidis — DevOps & Full-Stack Engineer",
-    description: "Interactive personal OS portfolio.",
+    title: `${PROFILE.name} — ${PROFILE.role}`,
+    description: "Engineering portfolio with an interactive OS you can boot into.",
   },
   robots: {
     index: true,
@@ -66,11 +71,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${jetbrainsMono.variable} ${dmSans.variable} h-full`}
-    >
-      <body className="h-full">{children}</body>
+    <html lang="en" className={`${jetbrainsMono.variable} ${dmSans.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,42 +1,7 @@
 "use client";
 
 import GlowButton from "@/components/ui/GlowButton";
-
-const EXPERIENCE = [
-  {
-    company: "Ctrl+Space Labs",
-    title: "Software Engineer",
-    period: "Sep 2023 — Present",
-    location: "Athens, Greece - Remote",
-    description:
-      "Implementing Gendox — a no-code platform for building AI chat agents powered by Generative AI. Full-stack: Spring Boot REST APIs, React frontend, AWS deployments, CI/CD pipelines.",
-    current: true,
-  },
-  {
-    company: "EASTH",
-    title: "IT & Agricultural Management Consultant",
-    period: "Jun 2009 — Jan 2023",
-    location: "Kilkis, Greece",
-    description:
-      "14-year tenure managing IT infrastructure, GIS field digitalization, IACS agricultural subsidy systems, and web solutions for one of Thessaloniki's largest agricultural partnerships.",
-    current: false,
-  },
-];
-
-const EDUCATION = [
-  {
-    school: "Hellenic Open University",
-    degree: "MSc — Data Science & Machine Learning (DAMA)",
-    period: "2024 — 2026",
-    active: true,
-  },
-  {
-    school: "Hellenic Open University",
-    degree: "Bachelor's — Computer Science & Informatics",
-    period: "2017 — 2022",
-    active: false,
-  },
-];
+import { EXPERIENCE, EDUCATION } from "@/lib/content";
 
 function SectionTitle({ icon, label }: { icon: string; label: string }) {
   return (
