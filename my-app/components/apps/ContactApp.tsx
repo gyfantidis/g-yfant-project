@@ -16,7 +16,7 @@ export default function ContactApp() {
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
     );
-    window.open(`mailto:ggyfantidis@gmail.com?subject=${subject}&body=${body}`);
+    window.open(`mailto:giannis@g-yfantidis.gr?subject=${subject}&body=${body}`);
     setSent(true);
   }
 
@@ -80,8 +80,8 @@ export default function ContactApp() {
 
       {/* Quick links */}
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-        <GlowButton href="mailto:ggyfantidis@gmail.com" variant="green">
-          ✉ ggyfantidis@gmail.com
+        <GlowButton href="mailto:giannis@g-yfantidis.gr" variant="green">
+          ✉ giannis@g-yfantidis.gr
         </GlowButton>
         <GlowButton
           href="https://linkedin.com/in/giannis-yfantidis"

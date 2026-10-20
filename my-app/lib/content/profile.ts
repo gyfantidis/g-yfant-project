@@ -6,23 +6,23 @@ export const PROFILE = {
   name: "Giannis Yfantidis",
   firstName: "Giannis",
   lastName: "Yfantidis",
-  role: "AI Platform & Full-Stack Engineer",
-  location: "Kilkis, Central Macedonia, Greece",
-  locationShort: "Kilkis · GR",
-  email: "ggyfantidis@gmail.com",
+  role: "AI Engineer",
+  location: "Thessaloniki metropolitan area, Greece",
+  locationShort: "Thessaloniki metropolitan area · GR",
+  email: "giannis@g-yfantidis.gr",
   available: true,
   availableLabel: "Open to work",
 
   /** Hero positioning line — what the site is actually about. */
   intro:
-    "I build AI platforms. No-code agent systems at Ctrl+Space Labs, an EU-funded research project on data provenance, and a Greek-language AI product I run end to end on my own infrastructure.",
+    "I build AI systems that run in production: retrieval over company documents, extraction from scanned archives, fine-tuned models that run locally. Developer at Ctrl+Space Labs since 2023.",
 
   /** Secondary line, one notch more specific. */
   subIntro:
-    "Spring Boot and React in production, Docker and CI/CD underneath, and an MSc in Data Science & Machine Learning in progress.",
+    "Java and Spring underneath, Python for the data work, an MSc in Data Science & Machine Learning on top.",
 
   /** Rendered as a slash-separated line under the name. */
-  focus: ["AI Platforms", "Full-Stack", "DevOps", "Machine Learning"],
+  focus: ["RAG", "Fine-tuning", "Document extraction", "Spring Boot"],
 } as const;
 
 export const SOCIALS = {

@@ -1,248 +1,125 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Marker from "@/components/site/Marker";
-import MachineBand from "@/components/site/MachineBand";
-import {
-  PROFILE,
-  EXPERIENCE,
-  EDUCATION,
-  TIMELINE,
-  CERTS,
-} from "@/lib/content";
+import TitleBlock from "@/components/site/TitleBlock";
+import { PathDiagram } from "@/components/site/Diagrams";
+import { EDUCATION, EXPERIENCE, PROFILE, SOCIALS } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: PROFILE.intro,
+  description: "AI engineer at Ctrl+Space Labs since 2023. Background, experience and education.",
 };
 
-export default function AboutPage() {
-  const current = EXPERIENCE.filter((e) => e.current);
-  const earlier = EXPERIENCE.filter((e) => !e.current);
+const STACK: { group: string; items: string }[] = [
+  { group: "AI", items: "RAG, embeddings, pgvector, tool calling, LoRA fine-tuning, vision LLMs, Ollama, Vertex AI, evaluation design" },
+  { group: "Backend", items: "Java 25, Spring Boot 3, Spring AI, Spring Batch, PostgreSQL, Flyway, Keycloak" },
+  { group: "Data", items: "Python, pandas, scikit-learn, XGBoost, SHAP" },
+  { group: "Frontend", items: "Next.js, React, Redux Toolkit, TypeScript" },
+  { group: "Ops", items: "Docker, GitHub Actions, Hetzner, Coolify, Linux" },
+];
 
+export default function AboutPage() {
   return (
     <>
-      <header className="wrap" style={{ paddingBlock: "clamp(40px, 5vw, 76px)" }}>
-        <h1 className="display">About</h1>
-        <div style={{ marginTop: 30, maxWidth: "60ch", display: "grid", gap: 18 }}>
-          <p className="lede">{PROFILE.intro}</p>
-          <p className="copy">
-            Day to day that means Spring Boot services and React frontends,
-            RAG pipelines and agent integrations, and the Docker, GitHub
-            Actions and Coolify plumbing that gets them into production. I run
-            my own infrastructure for side projects, which is the fastest way I
-            know to stay honest about how systems actually break.
-          </p>
-          <p className="copy">
-            Alongside the job I am finishing an MSc in Data Science and Machine
-            Learning at the Hellenic Open University — mostly so the ML half of
-            what I build rests on something firmer than intuition.
-          </p>
-        </div>
-      </header>
-
-      {/* ── Current work ── */}
-      <section className="band">
-        <div className="wrap">
-          <Marker num="01" label="Current" rest="Where I am now" />
-          <div className="manifest">
-            {current.map((job, i) => (
-              <div key={job.company} className="row">
-                <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
-                <span>
-                  <span className="row-title">{job.title}</span>
-                  <span
-                    className="mono"
-                    style={{
-                      display: "block",
-                      fontSize: 12,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--mark)",
-                      marginTop: 8,
-                    }}
-                  >
-                    {job.company} — {job.location}
-                  </span>
-                  <span className="row-sub" style={{ display: "block" }}>
-                    {job.description}
-                  </span>
-                </span>
-                <span className="row-tail">{job.period}</span>
-              </div>
-            ))}
+      <section className="sheet sec">
+        <p className="label">sheet 04</p>
+        <div className="grid-2" style={{ marginTop: 12, alignItems: "start" }}>
+          <div>
+            <h1 className="h1">About</h1>
+            <div className="body" style={{ marginTop: 20, fontSize: 17 }}>
+              <p>
+                I&apos;m an AI engineer based in the Thessaloniki metropolitan area, in northern Greece. Since 2023 I&apos;ve been a developer at
+                Ctrl+Space Labs, where we build Gendox, an open-source platform for AI agents on your own documents.
+                I implement most of its document pipeline: splitting and embedding jobs, integrations, Document
+                Insights, Digitization.
+              </p>
+              <p>
+                Since 2025 I&apos;ve also been the main developer on a large extraction project: scanned historical
+                registers in, validated datasets out, with a vision model I fine-tuned to run locally and an
+                evaluation harness that keeps everyone honest about the numbers.
+              </p>
+              <p>
+                I came to software late, studying computer science at the Hellenic Open University. I&apos;m now finishing an MSc in Data
+                Science and Machine Learning there.
+              </p>
+            </div>
           </div>
+          <figure className="drawing" style={{ maxWidth: 420, justifySelf: "end", width: "100%" }}>
+            <Image
+              src="/portrait-wad-2026.jpg"
+              alt={`${PROFILE.name}`}
+              width={880}
+              height={1100}
+              style={{ width: "100%", height: "auto", display: "block", filter: "grayscale(1) contrast(1.05)" }}
+              priority
+            />
+            <figcaption className="drawing-cap">
+              <span>fig. a — WeAreDevelopers World Congress, 2026</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      {/* ── Track ── */}
-      <section className="band">
-        <div className="wrap">
-          <Marker num="02" label="Track" rest="2022 → today" />
-          <ol
-            style={{
-              listStyle: "none",
-              display: "grid",
-              gap: 0,
-              maxWidth: 720,
-            }}
-          >
-            {TIMELINE.map((t, i) => (
-              <li
-                key={`${t.year}-${t.label}`}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "72px minmax(0, 1fr)",
-                  gap: 18,
-                  paddingBlock: 16,
-                  borderBottom:
-                    i === TIMELINE.length - 1 ? "none" : "1px solid var(--rule)",
-                }}
-              >
-                <span
-                  className="mono"
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 700,
-                    color: i === TIMELINE.length - 1 ? "var(--mark)" : "var(--ink-3)",
-                  }}
-                >
-                  {t.year}
-                </span>
-                <span>
-                  <span
-                    className="mono"
-                    style={{
-                      display: "block",
-                      fontSize: 15,
-                      fontWeight: 700,
-                      letterSpacing: "-0.01em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {t.label}
-                  </span>
-                  <span className="copy" style={{ display: "block", marginTop: 4 }}>
-                    {t.detail}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ol>
+      <section className="sheet sec">
+        <Marker n="01">Experience</Marker>
+        <div style={{ marginBottom: 32 }}>
+          <PathDiagram />
         </div>
+        <dl className="spec">
+          {EXPERIENCE.map((e) => (
+            <div key={e.company} style={{ display: "contents" }}>
+              <dt>{e.period}</dt>
+              <dd>
+                <span style={{ color: "var(--bp-ink)" }}>
+                  {e.title} · {e.company}
+                </span>
+                <br />
+                {e.description}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* ── Education ── */}
-      <section className="band">
-        <div className="wrap">
-          <Marker num="03" label="Education" />
-          <div className="manifest">
-            {EDUCATION.map((ed, i) => (
-              <div key={ed.degree} className="row">
-                <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
-                <span>
-                  <span
-                    className="mono"
-                    style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.01em" }}
-                  >
-                    {ed.degree}
-                  </span>
-                  <span className="row-sub" style={{ display: "block", marginTop: 6 }}>
-                    {ed.school}
-                  </span>
-                </span>
-                <span
-                  className="row-tail"
-                  style={{ color: ed.active ? "var(--mark)" : undefined }}
-                >
-                  {ed.period}
-                  {ed.active && " · in progress"}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="sheet sec">
+        <Marker n="02">Education</Marker>
+        <dl className="spec">
+          {EDUCATION.map((e) => (
+            <div key={e.degree} style={{ display: "contents" }}>
+              <dt>{e.period}</dt>
+              <dd>
+                <span style={{ color: "var(--bp-ink)" }}>{e.degree}</span>
+                <br />
+                {e.school}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* ── Certifications ── */}
-      <section className="band">
-        <div className="wrap">
-          <Marker num="04" label="Certifications" rest={`${CERTS.length} total`} />
-          <div className="manifest">
-            {CERTS.map((cert, i) => {
-              const body = (
-                <>
-                  <span className="row-idx">{String(i + 1).padStart(3, "0")}</span>
-                  <span>
-                    <span
-                      className="mono"
-                      style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.005em" }}
-                    >
-                      {cert.name}
-                    </span>
-                    <span className="row-sub" style={{ display: "block", marginTop: 5 }}>
-                      {cert.issuer}
-                    </span>
-                  </span>
-                  <span className="row-tail">
-                    {cert.date}
-                    {cert.url && " ↗"}
-                  </span>
-                </>
-              );
-              return cert.url ? (
-                <a
-                  key={cert.name}
-                  className="row"
-                  href={cert.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {body}
-                </a>
-              ) : (
-                <div key={cert.name} className="row">
-                  {body}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      <section className="sheet sec">
+        <Marker n="03">Tools I use daily</Marker>
+        <dl className="spec">
+          {STACK.map((s) => (
+            <div key={s.group} style={{ display: "contents" }}>
+              <dt>{s.group.toLowerCase()}</dt>
+              <dd>{s.items}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* ── Earlier ── */}
-      {earlier.length > 0 && (
-        <section className="band">
-          <div className="wrap">
-            <Marker num="05" label="Earlier" rest="Before engineering" />
-            {earlier.map((job) => (
-              <div
-                key={job.company}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "minmax(0, 1fr) auto",
-                  gap: 20,
-                  alignItems: "baseline",
-                  maxWidth: 820,
-                }}
-              >
-                <div>
-                  <span
-                    className="mono"
-                    style={{ fontSize: 14, fontWeight: 500 }}
-                  >
-                    {job.title} — {job.company}
-                  </span>
-                  <p className="copy" style={{ marginTop: 6, fontSize: 15 }}>
-                    {job.description}
-                  </p>
-                </div>
-                <span className="row-tail">{job.period}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <MachineBand />
+      <section className="sheet sec">
+        <Marker n="04">Roles</Marker>
+        <p className="body">
+          I&apos;m not actively looking, but I&apos;ll always read a message about an AI engineering role that involves
+          real systems and real evaluation. <a href={SOCIALS.email} className="link">{PROFILE.email}</a> or{" "}
+          <a href={SOCIALS.linkedin} className="link" target="_blank" rel="noreferrer">LinkedIn</a>.
+        </p>
+        <div style={{ marginTop: 64 }}>
+          <TitleBlock sheet="04 / 05" title="about" />
+        </div>
+      </section>
     </>
   );
 }

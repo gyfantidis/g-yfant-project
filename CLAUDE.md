@@ -23,9 +23,15 @@ yarn lint     # ESLint
 
 ### Architecture
 
-**Concept:** Simulated desktop OS experience. Visitor boots in via a terminal animation, then lands on an interactive desktop with draggable/resizable app windows.
+**Concept:** Two surfaces over one content layer (`lib/content/`):
+- **The site** (`app/(site)/`): "blueprint" design, every page drawn like an engineering sheet with a title block. Routes: `/`, `/work`, `/work/[slug]` (case studies), `/services`, `/about`, `/writing`, `/now`. Styles live in `app/(site)/site.css` (`--bp-*` tokens in `globals.css`); system diagrams are hand-placed SVG in `components/site/Diagrams.tsx`. Site-only content (case studies, services, now) is in `lib/content/site.ts`.
+- **The OS** (`app/os/`): easter egg linked from the nav. Visitor boots in via a terminal animation, then lands on an interactive desktop with draggable/resizable app windows.
 
-**Entry flow:** `app/page.tsx` → `BootSequence` (typewriter terminal) → `Desktop` (full OS).
+**Site design rules:** must not look AI-generated — no gradients, glow, emoji or buzzword copy; real diagrams of real systems, specific numbers. Cyan (`--bp-line`) = data path, amber (`--bp-out`) = output; nothing else gets colour. The extraction client project is never named. Personal/financial info never goes on the site.
+
+**Deploy:** pushes to `main` are deployed by Coolify. Work on a branch.
+
+**OS entry flow:** `app/os/page.tsx` → `BootSequence` (typewriter terminal) → `Desktop` (full OS).
 
 **Key files:**
 - [app/layout.tsx](my-app/app/layout.tsx) — JetBrains Mono + DM Sans fonts, SEO metadata

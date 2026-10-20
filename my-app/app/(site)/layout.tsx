@@ -1,5 +1,6 @@
 import SiteNav from "@/components/site/SiteNav";
 import SiteFooter from "@/components/site/SiteFooter";
+import "./site.css";
 
 export default function SiteLayout({
   children,
@@ -7,10 +8,7 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className="paper"
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-    >
+    <div className="bp">
       <SiteNav />
       <main style={{ flex: 1 }}>{children}</main>
       <SiteFooter />

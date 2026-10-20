@@ -492,7 +492,7 @@ export default function Menubar({ onSpotlightOpen, onShortcutsOpen }: MenubarPro
             {
               label: "Send Email",
               shortcut: "✉",
-              external: "mailto:ggyfantidis@gmail.com",
+              external: "mailto:giannis@g-yfantidis.gr",
             },
             {
               label: "LinkedIn",
@@ -698,7 +698,7 @@ export default function Menubar({ onSpotlightOpen, onShortcutsOpen }: MenubarPro
           }}
         >
           <span style={{ color: "var(--os-accent)" }}>●</span>
-          <span className="hidden sm:inline">Kilkis, GR</span>
+          <span className="hidden sm:inline">Thessaloniki, GR</span>
         </div>
       </div>
     </div>

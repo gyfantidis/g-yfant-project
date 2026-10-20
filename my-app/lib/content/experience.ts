@@ -10,11 +10,11 @@ export interface ExperienceEntry {
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "Ctrl+Space Labs",
-    title: "Software Engineer",
+    title: "Software Engineer, AI",
     period: "Sep 2023 — Present",
     location: "Athens, Greece - Remote",
     description:
-      "Implementing Gendox — a no-code platform for building AI chat agents powered by Generative AI. Full-stack: Spring Boot REST APIs, React frontend, AWS deployments, CI/CD pipelines.",
+      "Developer on Gendox, an open-source platform for AI agents on your own documents: ingestion jobs, integrations, Document Insights and Digitization, CI/CD. Main developer on a structured-extraction project with fine-tuned vision models.",
     current: true,
   },
   {
@@ -65,6 +65,6 @@ export const TIMELINE: TimelineEntry[] = [
   { year: "2023", label: "Ctrl+Space Labs", detail: "Joined as a software engineer, building Gendox." },
   { year: "2024", label: "ProvenAI", detail: "Shipped an NGI TrustChain research project on AI data provenance." },
   { year: "2024", label: "MSc DAMA", detail: "Started Data Science & Machine Learning." },
-  { year: "2025", label: "oneprompt.gr", detail: "Launched and self-hosted a Greek-language AI product." },
-  { year: "2026", label: "Today", detail: "Expanding Gendox, finishing the MSc." },
+  { year: "2025", label: "Extraction", detail: "Fine-tuned vision models for structured extraction from scanned registers." },
+  { year: "2026", label: "Today", detail: "Gendox integrations and a new frontend, finishing the MSc." },
 ];

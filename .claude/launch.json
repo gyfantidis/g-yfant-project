@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "my-app",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["--cwd", "my-app", "dev"],
+      "port": 3000
+    }
+  ]
+}

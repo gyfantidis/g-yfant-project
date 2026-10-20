@@ -1,18 +1,9 @@
-/** Section marker: "§ 02 — SELECTED WORK ................ 5 ENTRIES" */
-export default function Marker({
-  num,
-  label,
-  rest,
-}: {
-  num: string;
-  label: string;
-  rest?: string;
-}) {
+/** Section heading on a rule: "02 ── Selected work". */
+export default function Marker({ n, children }: { n: string; children: React.ReactNode }) {
   return (
     <div className="marker">
-      <span className="marker-num">§ {num}</span>
-      <span className="marker-label">{label}</span>
-      {rest && <span className="marker-rest">{rest}</span>}
+      <b>{n}</b>
+      <span>{children}</span>
     </div>
   );
 }

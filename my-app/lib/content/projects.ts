@@ -37,10 +37,10 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    title: "Maritime Data Pipeline",
+    title: "Historical Records Extraction",
     description:
-      "Digitised and structured historical Lloyd's Register shipping books (1764–1935) using Claude Code and Vertex AI for OCR and entity extraction.",
-    tech: ["Python", "Claude Code", "Vertex AI", "Pandas", "BigQuery"],
+      "Structured extraction from two centuries of scanned printed registers for a client. Fine-tuned Qwen3-VL 8B (LoRA) served locally with Ollama; 98.9% field accuracy on unseen pages.",
+    tech: ["Python", "Qwen3-VL", "LoRA", "Ollama", "Vertex AI"],
     highlight: "ML",
   },
   {

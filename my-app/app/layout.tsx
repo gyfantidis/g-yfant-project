@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, DM_Sans } from "next/font/google";
+import { JetBrains_Mono, DM_Sans, Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { PROFILE } from "@/lib/content";
 import "./globals.css";
 
@@ -17,47 +17,66 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-grotesk",
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin", "greek"],
+  variable: "--font-plex",
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-plex-mono",
+  weight: ["400", "500"],
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0a0a0f",
+  themeColor: "#0b1220",
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://g-yfantidis.gr"),
   title: {
     default: `${PROFILE.name} — ${PROFILE.role}`,
     template: `%s — ${PROFILE.name}`,
   },
   description:
-    "Full-Stack & DevOps Engineer building AI agent platforms. MSc Data Science & ML candidate, based in Kilkis, Greece.",
+    "AI engineer in Greece. RAG over company documents, structured extraction from scanned archives, fine-tuned models that run locally. Developer at Ctrl+Space Labs.",
   keywords: [
-    "DevOps",
-    "Full-Stack",
-    "React",
-    "Next.js",
-    "Docker",
-    "Kilkis",
-    "Central Macedonia",
-    "GR",
-    "Athens",
-    "Thessaloniki",
-    "Patras",
-    "Larissa",
+    "AI engineer",
+    "RAG",
+    "fine-tuning",
+    "document extraction",
+    "LLM",
+    "Spring Boot",
+    "Gendox",
     "Greece",
+    "Thessaloniki",
+    "Kilkis",
   ],
   authors: [{ name: PROFILE.name }],
   openGraph: {
     title: `${PROFILE.name} — ${PROFILE.role}`,
     description:
-      "Engineering portfolio — selected work, writing, and an interactive OS you can boot into.",
+      "AI engineer. RAG, document extraction, fine-tuning. Selected work and how it was built.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: `${PROFILE.name} — ${PROFILE.role}`,
-    description: "Engineering portfolio with an interactive OS you can boot into.",
+    description: "AI engineer. RAG, document extraction, fine-tuning.",
   },
   robots: {
     index: true,
@@ -71,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jetbrainsMono.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${jetbrainsMono.variable} ${dmSans.variable} ${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable}`}>
       <body>{children}</body>
     </html>
   );

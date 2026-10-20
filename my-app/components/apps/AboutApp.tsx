@@ -152,7 +152,7 @@ export default function AboutApp() {
         }}
       >
         {[
-          { label: "Location", value: "Kilkis, Central Macedonia, GR" },
+          { label: "Location", value: "Thessaloniki metropolitan area, GR" },
           { label: "Degree", value: "MSc DAMA" },
           { label: "Focus", value: "AI & Full-Stack" },
         ].map(({ label, value }) => (
@@ -433,7 +433,7 @@ export default function AboutApp() {
           </svg>
           LinkedIn
         </GlowButton>
-        <GlowButton href="mailto:ggyfantidis@gmail.com" variant="green">
+        <GlowButton href="mailto:giannis@g-yfantidis.gr" variant="green">
           ✉ Email
         </GlowButton>
       </div>

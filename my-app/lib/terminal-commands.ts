@@ -34,7 +34,7 @@ export function processCommand(rawInput: string): CommandResult {
     return {
       lines: [
         "✅ Permission granted.",
-        "   Contact: ggyfantidis@gmail.com",
+        "   Contact: giannis@g-yfantidis.gr",
         "   Opening contact app...",
       ],
       action: "open_contact",
@@ -81,7 +81,7 @@ export function processCommand(rawInput: string): CommandResult {
       lines: [
         "Name:     Giannis Yfantidis",
         "Title:    DevOps & Full-Stack Engineer",
-        "Location: Kilkis, Central Macedonia, Greece",
+        "Location: Thessaloniki metropolitan area, Greece",
         "Focus:    🟢 AI-powered products · Full-stack · Cloud",
         "",
         "→ Try 'whoami --human' for the full story.",
@@ -277,7 +277,7 @@ export function processCommand(rawInput: string): CommandResult {
       "1. Gendox               → No-code AI agent platform (live at ctrlspace.dev)",
       "2. oneprompt.gr         → Greek-language AI content platform",
       "3. ProvenAI             → NGI TrustChain project redefining AI data provenance", 
-      "4. Maritime Pipeline    → Historical Lloyd's Register OCR, 1764–1935",
+      "4. Records Extraction   → Scanned historical registers → datasets",
       "5. Football Predictor   → DAMA Hackathon · XGBoost · R²=0.81",
     ],
     blog: [
@@ -287,7 +287,7 @@ export function processCommand(rawInput: string): CommandResult {
       "4. Docker Compose Patterns I Use Every Day",
     ],
     contact: [
-      "Email:    ggyfantidis@gmail.com",
+      "Email:    giannis@g-yfantidis.gr",
       "GitHub:   github.com/gyfantidis",
       "LinkedIn: linkedin.com/in/giannis-yfantidis",
     ],
@@ -329,7 +329,7 @@ export function processCommand(rawInput: string): CommandResult {
     "cat about.txt": [
       "I build systems that scale and interfaces that matter.",
       "Currently pursuing MSc in Data Science & ML (DAMA).",
-      "Based in Kilkis, Central Macedonia, Greece.",
+      "Based in the Thessaloniki metropolitan area, Greece.",
       "",
       "9 years in agricultural IT → full-time software engineer.",
       "The long way around turned out to be the right way.",
